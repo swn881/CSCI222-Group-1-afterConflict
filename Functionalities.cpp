@@ -87,3 +87,33 @@ void Functionalities::setReviewerPaperReceive(int temp)
 {
     reviewerPaperReceive = temp;
 }
+
+int Functionalities::getAuthorResponse()
+{
+    return authorResponse;
+}
+
+int Functionalities::getReviewDiscussion()
+{
+    return reviewDiscussion;
+}
+
+int Functionalities::getReviewSubmission()
+{
+    return reviewSubmission;
+}
+
+int Functionalities::getPaperSubmission()
+{
+    return paperSubmission;
+}
+
+int Functionalities::getPaperReviewerReceive()
+{
+    return paperReviewerReceive;
+}
+
+int Functionalities::getReviewerPaperReceive()
+{
+    return reviewerPaperReceive;
+}

@@ -78,4 +78,11 @@ int Preference::countPaper()
     return recordCount;
 }
 
+int Preference::getPreference(unsigned int position)
+{
+    //checking
+    if (position < preference.size())
+        return preference[position];
+    return -1;
+}
 

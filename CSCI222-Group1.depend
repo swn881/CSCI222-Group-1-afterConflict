@@ -518,3 +518,173 @@
 1414130224 c:\users\ng\desktop\lol\functionalities.h
 	<iostream>
 
+1413812373 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\admin.cpp
+	<iostream>
+	"Admin.h"
+
+1413812373 c:\users\ng\documents\github\csci222-group-1-afterconflict\admin.h
+	"PCChair.h"
+	<iostream>
+
+1413955998 c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.h
+	"ProgramCommittee.h"
+	"User.h"
+
+1413893374 c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.h
+	"Author.h"
+	<iostream>
+
+1413812373 c:\users\ng\documents\github\csci222-group-1-afterconflict\author.h
+	<iostream>
+	<vector>
+	"User.h"
+
+1414068656 c:\users\ng\documents\github\csci222-group-1-afterconflict\user.h
+	<iostream>
+	<string>
+
+1413812373 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\author.cpp
+	"Author.h"
+	<iostream>
+
+1414066443 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
+	<iostream>
+	"SystemMain.h"
+	"PCChair.h"
+	"PaperManagement.h"
+
+1413965212 c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.h
+	<iostream>
+
+1414117592 c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.h
+	<iostream>
+	"ResearchPaper.h"
+
+1414122434 c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.h
+	<iostream>
+	<vector>
+
+1412418602 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\md5.cpp
+	"md5.h"
+	<cstdio>
+
+1412418602 c:\users\ng\documents\github\csci222-group-1-afterconflict\md5.h
+	<cstring>
+	<iostream>
+
+1414069708 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
+	<iostream>
+	<windows.h>
+	<fstream>
+	<sys/types.h>
+	<dirent.h>
+	<fstream>
+	<sstream>
+	"PaperManagement.h"
+	"ResearchPaper.h"
+	"User.h"
+
+1414117622 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.cpp
+	<iostream>
+	<stdlib.h>
+	"PaperReview.h"
+
+1414117592 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.h
+	<iostream>
+
+1413955998 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
+	"PCChair.h"
+	<iostream>
+	<fstream>
+
+1414148011 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\preference.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<stdlib.h>
+	"Preference.h"
+
+1414147962 c:\users\ng\documents\github\csci222-group-1-afterconflict\preference.h
+	<iostream>
+	<vector>
+
+1414131221 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\preferencemanagement.cpp
+	<iostream>
+	<fstream>
+	<algorithm>
+	"PreferenceManagement.h"
+	"Preference.h"
+	"ResearchPaper.h"
+
+1414130820 c:\users\ng\documents\github\csci222-group-1-afterconflict\preferencemanagement.h
+	<iostream>
+	"Preference.h"
+
+1413893374 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.cpp
+	"ProgramCommittee.h"
+	<iostream>
+
+1414131805 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.cpp
+	<iostream>
+	<vector>
+	"ResearchPaper.h"
+	<stdlib.h>
+
+1413988047 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
+	<iostream>
+	<windows.h>
+	"SystemMain.h"
+	"UserBoundary.h"
+	"Author.h"
+	"ProgramCommittee.h"
+	"PCChair.h"
+
+1413890341 c:\users\ng\documents\github\csci222-group-1-afterconflict\userboundary.h
+	<iostream>
+	"UserControl.h"
+
+1413890341 c:\users\ng\documents\github\csci222-group-1-afterconflict\usercontrol.h
+	<iostream>
+
+1413896911 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\user.cpp
+	"User.h"
+	<cstring>
+	<iostream>
+
+1413953502 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\userboundary.cpp
+	<iostream>
+	<windows.h>
+	"UserBoundary.h"
+	<cstring>
+	<conio.h>
+
+1413890341 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\usercontrol.cpp
+	<iostream>
+	<fstream>
+	"UserControl.h"
+	"User.h"
+	<cstring>
+	"md5.h"
+
+1414144139 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalities.cpp
+	<iostream>
+	<stdlib.h>
+	"Functionalities.h"
+
+1414144139 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalities.h
+	<iostream>
+
+1414150179 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	"FunctionalitiesManagement.h"
+	"PreferenceManagement.h"
+	"ResearchPaper.h"
+	"User.h"
+	"Functionalities.h"
+
+1414150203 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.h
+	<iostream>
+	"Functionalities.h"
+

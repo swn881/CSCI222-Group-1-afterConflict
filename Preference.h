@@ -24,6 +24,7 @@ class Preference
         void setUsername(std::string);
         std::string getUsername();
         int countPaper();
+        int getPreference(unsigned int);
 
 };
 

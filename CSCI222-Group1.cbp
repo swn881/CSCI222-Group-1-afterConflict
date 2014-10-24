@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="CSCI222-Group1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/CSCI222-Group1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/CSCI222-Group1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Admin.cpp" />
+		<Unit filename="Admin.h" />
+		<Unit filename="Author.cpp" />
+		<Unit filename="Author.h" />
+		<Unit filename="Functionalities.cpp" />
+		<Unit filename="Functionalities.h" />
+		<Unit filename="FunctionalitiesManagement.cpp" />
+		<Unit filename="FunctionalitiesManagement.h" />
+		<Unit filename="PCChair.cpp" />
+		<Unit filename="PCChair.h" />
+		<Unit filename="PaperManagement.cpp" />
+		<Unit filename="PaperManagement.h" />
+		<Unit filename="PaperReview.cpp" />
+		<Unit filename="PaperReview.h" />
+		<Unit filename="Preference.cpp" />
+		<Unit filename="Preference.h" />
+		<Unit filename="PreferenceManagement.cpp" />
+		<Unit filename="PreferenceManagement.h" />
+		<Unit filename="ProgramCommittee.cpp" />
+		<Unit filename="ProgramCommittee.h" />
+		<Unit filename="ResearchPaper.cpp" />
+		<Unit filename="ResearchPaper.h" />
+		<Unit filename="SystemMain.cpp" />
+		<Unit filename="SystemMain.h" />
+		<Unit filename="User.cpp" />
+		<Unit filename="User.h" />
+		<Unit filename="UserBoundary.cpp" />
+		<Unit filename="UserBoundary.h" />
+		<Unit filename="UserControl.cpp" />
+		<Unit filename="UserControl.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="md5.cpp" />
+		<Unit filename="md5.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

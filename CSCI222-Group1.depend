@@ -1,0 +1,520 @@
+# depslib dependency file v1.0
+1413936538 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\main.cpp
+	<iostream>
+	"SystemMain.h"
+	"PCChair.h"
+
+1413896682 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\user.h
+	<iostream>
+	<string>
+
+1413890341 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\userboundary.h
+	<iostream>
+	"UserControl.h"
+
+1413890341 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\userboundary.cpp
+	<iostream>
+	"UserBoundary.h"
+	<cstring>
+
+1413890341 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\usercontrol.cpp
+	<iostream>
+	<fstream>
+	"UserControl.h"
+	"User.h"
+	<cstring>
+	"md5.h"
+
+1413890341 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\usercontrol.h
+	<iostream>
+
+1413896911 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\user.cpp
+	"User.h"
+	<cstring>
+	<iostream>
+
+1412418602 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\md5.cpp
+	"md5.h"
+	<cstdio>
+
+1412418602 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\md5.h
+	<cstring>
+	<iostream>
+
+1412427141 source:c:\users\giritharan\dropbox\codes\csci222-group1\main.cpp
+	<iostream>
+	"UserBoundary.h"
+
+1412426961 c:\users\giritharan\dropbox\codes\csci222-group1\userboundary.h
+	<iostream>
+	"UserControl.h"
+
+1412432981 c:\users\giritharan\dropbox\codes\csci222-group1\usercontrol.h
+	<iostream>
+
+1412418602 source:c:\users\giritharan\dropbox\codes\csci222-group1\md5.cpp
+	"md5.h"
+	<cstdio>
+
+1412418602 c:\users\giritharan\dropbox\codes\csci222-group1\md5.h
+	<cstring>
+	<iostream>
+
+1412424069 source:c:\users\giritharan\dropbox\codes\csci222-group1\user.cpp
+	"User.h"
+	<cstring>
+	<iostream>
+
+1412424069 c:\users\giritharan\dropbox\codes\csci222-group1\user.h
+	<iostream>
+	<string>
+
+1412432622 source:c:\users\giritharan\dropbox\codes\csci222-group1\userboundary.cpp
+	<iostream>
+	"UserBoundary.h"
+	<cstring>
+
+1412432981 source:c:\users\giritharan\dropbox\codes\csci222-group1\usercontrol.cpp
+	<iostream>
+	<fstream>
+	"UserControl.h"
+	"User.h"
+	<cstring>
+	"md5.h"
+
+1412418602 source:c:\users\damon\dropbox\codes\csci222-group1\md5.cpp
+	"md5.h"
+	<cstdio>
+
+1412418602 c:\users\damon\dropbox\codes\csci222-group1\md5.h
+	<cstring>
+	<iostream>
+
+1412424069 source:c:\users\damon\dropbox\codes\csci222-group1\user.cpp
+	"User.h"
+	<cstring>
+	<iostream>
+
+1412424069 c:\users\damon\dropbox\codes\csci222-group1\user.h
+	<iostream>
+	<string>
+
+1412432622 source:c:\users\damon\dropbox\codes\csci222-group1\userboundary.cpp
+	<iostream>
+	"UserBoundary.h"
+	<cstring>
+
+1412426961 c:\users\damon\dropbox\codes\csci222-group1\userboundary.h
+	<iostream>
+	"UserControl.h"
+
+1412432981 c:\users\damon\dropbox\codes\csci222-group1\usercontrol.h
+	<iostream>
+
+1412432981 source:c:\users\damon\dropbox\codes\csci222-group1\usercontrol.cpp
+	<iostream>
+	<fstream>
+	"UserControl.h"
+	"User.h"
+	<cstring>
+	"md5.h"
+
+1413014950 source:c:\users\damon\dropbox\codes\csci222-group1\conferencecreateboundry.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"conferenceCreateBoundry.h"
+	"conferenceCreateController.h"
+
+1413014311 c:\users\damon\dropbox\codes\csci222-group1\conferencecreateboundry.h
+
+1413014902 c:\users\damon\dropbox\codes\csci222-group1\conferencecreatecontroller.h
+	<string>
+
+1413014635 source:c:\users\damon\dropbox\codes\csci222-group1\conferencecreatecontroller.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"conferenceCreateBoundry.h"
+	"conferenceCreateController.h"
+	"conferenceCreateEntity.h"
+
+1413014419 c:\users\damon\dropbox\codes\csci222-group1\conferencecreateentity.h
+	<string>
+
+1413014624 source:c:\users\damon\dropbox\codes\csci222-group1\conferencecreateentity.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"conferenceCreateController.h"
+	"conferenceCreateEntity.h"
+
+1413337596 source:c:\users\damon\dropbox\codes\csci222-group1\main.cpp
+	<iostream>
+	"UserBoundary.h"
+	"conferenceCreateBoundry.h"
+	"paperSubmitBoundry.h"
+
+1413016214 c:\users\damon\dropbox\codes\csci222-group1\papersubmitboundry.h
+
+1413158000 source:c:\users\damon\dropbox\codes\csci222-group1\papersubmitboundry.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<vector>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"paperSubmitController.h"
+	"paperSubmitBoundry.h"
+
+1413015952 c:\users\damon\dropbox\codes\csci222-group1\papersubmitcontroller.h
+	<string>
+
+1413158015 source:c:\users\damon\dropbox\codes\csci222-group1\papersubmitcontroller.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<vector>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"paperSubmitBoundry.h"
+	"paperSubmitController.h"
+	"paperSubmitEntity.h"
+
+1413015518 c:\users\damon\dropbox\codes\csci222-group1\papersubmitentity.h
+	<string>
+	<vector>
+
+1413158024 source:c:\users\damon\dropbox\codes\csci222-group1\papersubmitentity.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<vector>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"paperSubmitController.h"
+	"paperSubmitEntity.h"
+
+1413812373 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\author.cpp
+	"Author.h"
+	<iostream>
+
+1413812373 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\author.h
+	<iostream>
+	<vector>
+	"User.h"
+
+1413799786 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\usermanagement.h
+	<iostream>
+	"User.h"
+	<vector>
+
+1413798632 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\usermanagement.cpp
+	"UserManagement.h"
+	"Author.h"
+	"PCChair.h"
+	"Admin.h"
+	"ProgramCommittee.h"
+	<iostream>
+	<fstream>
+
+1413893374 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\programcommittee.cpp
+	"ProgramCommittee.h"
+	<iostream>
+
+1413893374 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\programcommittee.h
+	"Author.h"
+	<iostream>
+
+1413896785 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\pcchair.cpp
+	"PCChair.h"
+	<iostream>
+	<fstream>
+
+1413896785 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\pcchair.h
+	"ProgramCommittee.h"
+	"User.h"
+
+1413812373 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\admin.cpp
+	<iostream>
+	"Admin.h"
+
+1413812373 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\admin.h
+	"PCChair.h"
+	<iostream>
+
+1413890386 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\systemmain.h
+	<iostream>
+
+1413936517 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\systemmain.cpp
+	<iostream>
+	"SystemMain.h"
+	"UserBoundary.h"
+	"Author.h"
+	"ProgramCommittee.h"
+
+1413937882 source:c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\papersubmit.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<vector>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"paperSubmitController.h"
+	"paperSubmit.h"
+
+1413937714 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\papersubmitcontroller.h
+	<string>
+
+1413937868 c:\users\ng\dropbox\uow\semester 4 wut wut\csci222\ass\assignmentgroup1\csci222-group-1-spring-2014\codes\csci222-group1\papersubmit.h
+	<string>
+	<vector>
+
+1413812373 source:c:\users\ng\desktop\lol\admin.cpp
+	<iostream>
+	"Admin.h"
+
+1413812373 c:\users\ng\desktop\lol\admin.h
+	"PCChair.h"
+	<iostream>
+
+1413955998 c:\users\ng\desktop\lol\pcchair.h
+	"ProgramCommittee.h"
+	"User.h"
+
+1413893374 c:\users\ng\desktop\lol\programcommittee.h
+	"Author.h"
+	<iostream>
+
+1413812373 c:\users\ng\desktop\lol\author.h
+	<iostream>
+	<vector>
+	"User.h"
+
+1414068656 c:\users\ng\desktop\lol\user.h
+	<iostream>
+	<string>
+
+1413812373 source:c:\users\ng\desktop\lol\author.cpp
+	"Author.h"
+	<iostream>
+
+1414066443 source:c:\users\ng\desktop\lol\main.cpp
+	<iostream>
+	"SystemMain.h"
+	"PCChair.h"
+	"PaperManagement.h"
+
+1413965212 c:\users\ng\desktop\lol\systemmain.h
+	<iostream>
+
+1412418602 source:c:\users\ng\desktop\lol\md5.cpp
+	"md5.h"
+	<cstdio>
+
+1412418602 c:\users\ng\desktop\lol\md5.h
+	<cstring>
+	<iostream>
+
+1413955998 source:c:\users\ng\desktop\lol\pcchair.cpp
+	"PCChair.h"
+	<iostream>
+	<fstream>
+
+1413893374 source:c:\users\ng\desktop\lol\programcommittee.cpp
+	"ProgramCommittee.h"
+	<iostream>
+
+1413896911 source:c:\users\ng\desktop\lol\user.cpp
+	"User.h"
+	<cstring>
+	<iostream>
+
+1413953502 source:c:\users\ng\desktop\lol\userboundary.cpp
+	<iostream>
+	<windows.h>
+	"UserBoundary.h"
+	<cstring>
+	<conio.h>
+
+1413890341 c:\users\ng\desktop\lol\userboundary.h
+	<iostream>
+	"UserControl.h"
+
+1413890341 c:\users\ng\desktop\lol\usercontrol.h
+	<iostream>
+
+1413890341 source:c:\users\ng\desktop\lol\usercontrol.cpp
+	<iostream>
+	<fstream>
+	"UserControl.h"
+	"User.h"
+	<cstring>
+	"md5.h"
+
+1413988047 source:c:\users\ng\desktop\lol\systemmain.cpp
+	<iostream>
+	<windows.h>
+	"SystemMain.h"
+	"UserBoundary.h"
+	"Author.h"
+	"ProgramCommittee.h"
+	"PCChair.h"
+
+1413938388 source:c:\users\ng\desktop\lol\papersubmit.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<vector>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"paperSubmitController.h"
+	"paperSubmit.h"
+
+1413938388 c:\users\ng\desktop\lol\papersubmitcontroller.h
+	<string>
+
+1413938388 c:\users\ng\desktop\lol\papersubmit.h
+	<string>
+	<vector>
+
+1413938388 source:c:\users\ng\desktop\lol\papersubmitboundry.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<vector>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"paperSubmitController.h"
+	"paperSubmitBoundry.h"
+
+1413938388 c:\users\ng\desktop\lol\papersubmitboundry.h
+	<string>
+
+1413938388 source:c:\users\ng\desktop\lol\papersubmitcontroller.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<string>
+	<vector>
+	<ctime>
+	<sstream>
+	<conio.h>
+	"paperSubmitBoundry.h"
+	"paperSubmitController.h"
+	"paperSubmit.h"
+
+1414122627 source:c:\users\ng\desktop\lol\functionalitiesmanagement.cpp
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	"FunctionalitiesManagement.h"
+	"ResearchPaper.h"
+
+1414122456 c:\users\ng\desktop\lol\functionalitiesmanagement.h
+	<iostream>
+
+1414131805 source:c:\users\ng\desktop\lol\researchpaper.cpp
+	<iostream>
+	<vector>
+	"ResearchPaper.h"
+	<stdlib.h>
+
+1414122434 c:\users\ng\desktop\lol\researchpaper.h
+	<iostream>
+	<vector>
+
+1414065348 source:c:\users\ng\desktop\lol\submitpaper.cpp
+	<iostream>
+	<windows.h>
+	<fstream>
+	<sys/types.h>
+	<dirent.h>
+	<fstream>
+	<sstream>
+	"SubmitPaper.h"
+	"ResearchPaper.h"
+
+1414066076 c:\users\ng\desktop\lol\submitpaper.h
+	<iostream>
+	"ResearchPaper.h"
+
+1414069708 source:c:\users\ng\desktop\lol\papermanagement.cpp
+	<iostream>
+	<windows.h>
+	<fstream>
+	<sys/types.h>
+	<dirent.h>
+	<fstream>
+	<sstream>
+	"PaperManagement.h"
+	"ResearchPaper.h"
+	"User.h"
+
+1414117592 c:\users\ng\desktop\lol\papermanagement.h
+	<iostream>
+	"ResearchPaper.h"
+
+1414117622 source:c:\users\ng\desktop\lol\paperreview.cpp
+	<iostream>
+	<stdlib.h>
+	"PaperReview.h"
+
+1414117592 c:\users\ng\desktop\lol\paperreview.h
+	<iostream>
+
+1414125965 source:c:\users\ng\desktop\lol\preference.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<stdlib.h>
+	"Preference.h"
+
+1414125965 c:\users\ng\desktop\lol\preference.h
+	<iostream>
+	<vector>
+
+1414131221 source:c:\users\ng\desktop\lol\preferencemanagement.cpp
+	<iostream>
+	<fstream>
+	<algorithm>
+	"PreferenceManagement.h"
+	"Preference.h"
+	"ResearchPaper.h"
+
+1414130820 c:\users\ng\desktop\lol\preferencemanagement.h
+	<iostream>
+	"Preference.h"
+
+1414131805 source:c:\users\ng\desktop\lol\functionalities.cpp
+	<iostream>
+	<stdlib.h>
+	"Functionalities.h"
+
+1414130224 c:\users\ng\desktop\lol\functionalities.h
+	<iostream>
+

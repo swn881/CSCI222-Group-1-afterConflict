@@ -9,6 +9,132 @@
 
 using namespace std;
 
+void FuncManagement::menu()
+{
+    cout << "Functionalities Management page. . ." << endl << endl;
+    int choice = 9;
+
+    while (choice != 0)
+    {
+        cout << "1. Auto-assign papers to reviewers     //not implemented" << endl;
+        cout << "2. Auto-assign preferences to reviewer" << endl;
+        cout << "3. Manually set the number of papers A reviewer receive    //not implemented" << endl;
+        cout << "4. Generate conference proceeding" << endl;
+        cout << "5. Group paper         //not implemented" << endl;
+        cout << "6. Set the number of reviewers paper receive" << endl;
+        cout << "7. Set the number of papers reviewers receive" << endl;
+        cout << "8. Enable/Disable paper reviews" << endl;
+        cout << "9. Enable/Disable user response to the reviews" << endl;
+        cout << "10. Enable/Disable discussion among reviewers" <<  endl;
+        cout << "11. Enable/Disable paper submission" << endl;
+        cout << "0. Exit" << endl;
+        cout << "Choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            {
+                cout << "Auto assign papers to reviewers" << endl;
+            }
+            break;
+        case 2:
+            {
+                int decision;
+                cout << "Auto assign preferences to reviewer" << endl;
+                cout << "This is suggested to be done AFTER paper submission has been closed!" << endl;
+                cout << "Are you sure?" << endl;
+                cout << "1. Yes" << endl;
+                cout << "2. No" << endl;
+                cout << "Choice: ";
+                cin >> decision;
+                if (decision == 1)
+                {
+                    autoSpecifyPreference();
+                    cout << "Assigned preference to reviewers " << endl;
+                }
+
+            }
+            break;
+        case 3:
+            {
+                cout << "Manually set the number of papers A reviewer receive" << endl;
+            }
+            break;
+        case 4:
+            {
+                int decision;
+                cout << "Generate conference proceeding" << endl;
+                cout << "This is suggested to be done AFTER paper reviews has been closed!" << endl;
+                cout << "Are you sure?" << endl;
+                cout << "1. Yes" << endl;
+                cout << "2. No" << endl;
+                cout << "Choice: ";
+                cin >> decision;
+                if (decision == 1)
+                {
+                    autoSpecifyPreference();
+                    cout << "Assigned preference to reviewers " << endl;
+                }
+                generateConferenceProceeding();
+            }
+            break;
+        case 5:
+            {
+                cout << "Group apper" << endl;
+            }
+            break;
+        case 6:
+            {
+                cout << "Set number of reviewers paper receive" << endl;
+                setReviewerPaperReceive();
+            }
+            break;
+        case 7:
+            {
+                cout << "Set number of papers reviewers receive" << endl;
+                setPaperReviewerReceive();
+            }
+            break;
+        case 8:
+            {
+                cout << "Enable/Disable paper reviews" << endl;
+                enableRevSubmission();
+            }
+            break;
+        case 9:
+            {
+                cout << "Enable/Disable user response to reviews" << endl;
+                enableAutResponse();
+            }
+            break;
+        case 10:
+            {
+                cout << "Enable/Disable discussion among reviewers" << endl;
+                enableRevDiscussion();
+            }
+            break;
+        case 11:
+            {
+                cout << "Enable/Disable paper submission" << endl;
+                enablePapSubmission();
+            }
+            break;
+        case 0:
+            {
+                cout << "EXITINNNN" << endl;
+                cout << endl;
+            }
+            break;
+        default:
+            {
+                cout << "Invalid choice!" << endl;
+                cout << "Please try again!" << endl;
+            }
+        }
+    }
+}
+
 void FuncManagement::autoAssignPapersToReviewers()
 {
     int recordNum = countUser();
@@ -70,27 +196,33 @@ void FuncManagement::autoAssignPapersToReviewers()
     {
         for(int j = 0; j < preferenceNum; j++) //at this point we can assume that preference num is equal to the num of users
         {
-            //in the file we will equal number of users who have given their preference
-            //so at this point, auto assignment of preference must have been done
-            userPreference = preference[j].getPreference(i);  //user number 1's preference on first paper (ON COMING IN THE FIRST TIME)
-
-            //check his preference on the paper
-            //we will only consider yes, or maybe and push it into the vector
-            /*
-                preferences:
-                1. yes
-                2. no
-                3. maybe
-                4. conflict of interest
-
-            */
-            if(userPreference == 1)
+            //we also want to check how many papers the user has been assigned at the current moment
+            //if he has already has e.g 5 papers assigned to him
+            //then we dont consider him at all
+            if(user[i].getNumPaperAssigned() < functionalities.getPaperReviewerReceive())
             {
-                yes.push_back(preference[j].getUsername());
-            }
-            else if (userPreference == 3)
-            {
-                maybe.push_back(preference[j].getUsername());
+                //in the file we will equal number of users who have given their preference
+                //so at this point, auto assignment of preference must have been done
+                userPreference = preference[j].getPreference(i);  //user number 1's preference on first paper (ON COMING IN THE FIRST TIME)
+
+                //check his preference on the paper
+                //we will only consider yes, or maybe and push it into the vector
+                /*
+                    preferences:
+                    1. yes
+                    2. no
+                    3. maybe
+                    4. conflict of interest
+
+                */
+                if(userPreference == 1)
+                {
+                    yes.push_back(preference[j].getUsername());
+                }
+                else if (userPreference == 3)
+                {
+                    maybe.push_back(preference[j].getUsername());
+                }
             }
         }
         //by the end of this for loop we will have recorded each users preference on paper 1 (ON FIRST ENTRY)
@@ -101,7 +233,7 @@ void FuncManagement::autoAssignPapersToReviewers()
         if (yes.size() == functionalities.getReviewerPaperReceive())
         {
             //if the size if equal then we can just assigned these set of users with the paper
-
+//*****************************************************//
         }
     }
 }
@@ -145,11 +277,13 @@ void FuncManagement::enableAutResponse()
                 functionalities.setAuthorResponse();
                 check = true;
             }
+            break;
             case 2:
             {
                 cout << "No changes made!" << endl;
                 check = true;
             }
+            break;
             default:
             {
                 cout << "Invalid choice!" << endl;
@@ -196,11 +330,13 @@ void FuncManagement::enableRevDiscussion()
                 functionalities.setReviewDiscussion();
                 check = true;
             }
+            break;
             case 2:
             {
                 cout << "No changes made!" << endl;
                 check = true;
             }
+            break;
             default:
             {
                 cout << "Invalid choice!" << endl;
@@ -247,11 +383,13 @@ void FuncManagement::enableRevSubmission()
                 functionalities.setReviewSubmission();
                 check = true;
             }
+            break;
             case 2:
             {
                 cout << "No changes made!" << endl;
                 check = true;
             }
+            break;
             default:
             {
                 cout << "Invalid choice!" << endl;
@@ -299,17 +437,19 @@ void FuncManagement::enablePapSubmission()
                 functionalities.setPaperSubmission();
                 check = true;
             }
+            break;
             case 2:
             {
                 cout << "No changes made!" << endl;
                 check = true;
             }
+            break;
             default:
             {
                 cout << "Invalid choice!" << endl;
                 check = false;
             }
-
+            break;
         }
 
     }

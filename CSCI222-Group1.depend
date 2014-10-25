@@ -526,28 +526,30 @@
 	"PCChair.h"
 	<iostream>
 
-1413955998 c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.h
+1414211551 c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.h
 	"ProgramCommittee.h"
 	"User.h"
 
-1413893374 c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.h
+1414211551 c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.h
 	"Author.h"
 	<iostream>
 
-1413812373 c:\users\ng\documents\github\csci222-group-1-afterconflict\author.h
+1414200916 c:\users\ng\documents\github\csci222-group-1-afterconflict\author.h
 	<iostream>
 	<vector>
-	"User.h"
 
-1414068656 c:\users\ng\documents\github\csci222-group-1-afterconflict\user.h
+1414213815 c:\users\ng\documents\github\csci222-group-1-afterconflict\user.h
 	<iostream>
 	<string>
+	<vector>
 
-1413812373 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\author.cpp
+1414200929 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\author.cpp
 	"Author.h"
+	"PaperManagement.h"
+	"UserBoundary.h"
 	<iostream>
 
-1414066443 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
+1414200958 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
 	<iostream>
 	"SystemMain.h"
 	"PCChair.h"
@@ -556,7 +558,7 @@
 1413965212 c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.h
 	<iostream>
 
-1414117592 c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.h
+1414208849 c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.h
 	<iostream>
 	"ResearchPaper.h"
 
@@ -572,7 +574,7 @@
 	<cstring>
 	<iostream>
 
-1414069708 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
+1414209023 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
 	<iostream>
 	<windows.h>
 	<fstream>
@@ -580,6 +582,7 @@
 	<dirent.h>
 	<fstream>
 	<sstream>
+	<limits.h>
 	"PaperManagement.h"
 	"ResearchPaper.h"
 	"User.h"
@@ -592,8 +595,9 @@
 1414117592 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.h
 	<iostream>
 
-1413955998 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
+1414211424 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
 	"PCChair.h"
+	"FunctionalitiesManagement.h"
 	<iostream>
 	<fstream>
 
@@ -608,7 +612,7 @@
 	<iostream>
 	<vector>
 
-1414131221 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\preferencemanagement.cpp
+1414212572 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\preferencemanagement.cpp
 	<iostream>
 	<fstream>
 	<algorithm>
@@ -620,17 +624,18 @@
 	<iostream>
 	"Preference.h"
 
-1413893374 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.cpp
+1414211551 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.cpp
 	"ProgramCommittee.h"
+	"PreferenceManagement.h"
 	<iostream>
 
-1414131805 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.cpp
+1414205456 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.cpp
 	<iostream>
 	<vector>
 	"ResearchPaper.h"
 	<stdlib.h>
 
-1413988047 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
+1414212023 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
 	<iostream>
 	<windows.h>
 	"SystemMain.h"
@@ -638,6 +643,7 @@
 	"Author.h"
 	"ProgramCommittee.h"
 	"PCChair.h"
+	"Admin.h"
 
 1413890341 c:\users\ng\documents\github\csci222-group-1-afterconflict\userboundary.h
 	<iostream>
@@ -646,19 +652,21 @@
 1413890341 c:\users\ng\documents\github\csci222-group-1-afterconflict\usercontrol.h
 	<iostream>
 
-1413896911 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\user.cpp
+1414202263 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\user.cpp
 	"User.h"
 	<cstring>
+	<vector>
+	<stdlib.h>
 	<iostream>
 
-1413953502 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\userboundary.cpp
+1414209482 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\userboundary.cpp
 	<iostream>
 	<windows.h>
 	"UserBoundary.h"
 	<cstring>
 	<conio.h>
 
-1413890341 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\usercontrol.cpp
+1414209482 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\usercontrol.cpp
 	<iostream>
 	<fstream>
 	"UserControl.h"
@@ -674,7 +682,7 @@
 1414144139 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalities.h
 	<iostream>
 
-1414150179 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
+1414211229 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
 	<iostream>
 	<stdlib.h>
 	<fstream>
@@ -684,7 +692,16 @@
 	"User.h"
 	"Functionalities.h"
 
-1414150203 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.h
+1414211229 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.h
 	<iostream>
 	"Functionalities.h"
+
+1414150322 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperassignment.cpp
+	<iostream>
+	<stdlib.h>
+	"PaperAssignment.h"
+
+1414150236 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperassignment.h
+	<iostream>
+	<vector>
 

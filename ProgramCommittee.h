@@ -9,7 +9,7 @@ class ProgramCommittee : public Author
     private:
 
     public:
-        void test();
+        void specifyPreference(std::string);
 };
 
 #endif // _PROGRAMCOMMITTEE_

@@ -29,6 +29,7 @@ class FuncManagement
         void loadFunctionalities(Functionalities&); //read from functionalities
         void writeFunctionalities(Functionalities&); //write to functionalities file the new changes
 
+        void menu();
 };
 
 #endif // _FUNCMANAGEMENT

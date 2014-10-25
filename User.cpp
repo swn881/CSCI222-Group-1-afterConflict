@@ -1,12 +1,23 @@
 #include "User.h"
 #include <cstring>
+#include <vector>
+#include <stdlib.h>
 #include <iostream>
 
 using namespace std;
 
 ostream& operator<< (ostream& out, const User& user)
 {
-    out << user.type << "," << user.userName << "," << user.firstName  << "," << user.lastName << "," << user.email << "," << user.university << "," << user.expertise << "," << user.password << endl;
+    out << user.type << "," << user.userName << "," << user.firstName  << "," << user.lastName << "," << user.email << "," << user.university << "," << user.expertise << ",";
+    out << user.numPaperAssigned << ",";
+    if (user.numPaperAssigned != 0)
+    {
+        for (int i = 0; i < user.numPaperAssigned; i++)
+        {
+            out << user.paperAssigned[i] << ",";
+        }
+    }
+    out << user.password << endl;
     return out;
 }
 
@@ -19,6 +30,18 @@ istream& operator>> (istream& in, User& user)
     getline(in, user.email, ',');
     getline(in, user.university, ',');
     getline(in, user.expertise, ',');
+    string tempString;
+    getline(in, tempString, ',');
+    user.numPaperAssigned = atoi(tempString.c_str());
+    if (user.numPaperAssigned != 0)
+    {
+        for (int i = 0; i < user.numPaperAssigned; i++)
+        {
+            getline(in, tempString, ',');
+            user.paperAssigned.push_back(atoi(tempString.c_str()));
+        }
+    }
+
     getline(in, user.password, '\n');
     return in;
 }
@@ -30,6 +53,7 @@ User::~User()
     lastName = "";
     email = "";
     university = "";
+    numPaperAssigned = 0;
 }
 
 void User::display()

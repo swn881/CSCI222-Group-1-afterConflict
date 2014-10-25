@@ -1,11 +1,13 @@
 #include "ProgramCommittee.h"
+#include "PreferenceManagement.h"
 #include <iostream>
 
 using namespace std;
 
 //user -> author -> program committee
-void ProgramCommittee::test()
+void ProgramCommittee::specifyPreference(std::string currentlyLoggedIn)
 {
-    cout << 111 << endl;
+    PrefManagement prefManagement;
+    prefManagement.specifyPreference(currentlyLoggedIn);
 }
 

@@ -14,6 +14,7 @@ class PaperManagement
         void reviewPaper(std::string);
 
         void writeFile(const ResearchPaper&); //write current paper record into file
+        void writeAll(ResearchPaper[], int);
         void transferFile(ResearchPaper); //get the file from the user and paste it in our directory
         int generateID(); //function to generate ID
         int countPaper(); //count number of lines in file

@@ -1,16 +1,18 @@
 #include <iostream>
 #include <vector>
-#include "User.h"
 
 #ifndef _AUTHOR_
 #define _AUTHOR_
 
-class Author : public User
+class Author
 {
     private:
-        std::vector<int> paperAssigned;
+
     public:
-        void addPaper(int);
+        void changeDetails(std::string);
+        void changePassword(std::string);
+        void submitPaper();
+        void modifyPaperSubmission(std::string);
 };
 
 #endif

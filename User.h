@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 #ifndef _USER_
 #define _USER_
@@ -17,8 +18,10 @@ class User
         std::string expertise;
         std::string password;
         std::string type;
+        int numPaperAssigned;
+        std::vector<int>paperAssigned;
     public:
-        User() {userName = ""; firstName = ""; lastName = ""; email = ""; university = ""; password = ""; type = "";}
+        User() {userName = ""; firstName = ""; lastName = ""; email = ""; university = ""; password = ""; type = ""; numPaperAssigned = 0;}
         ~User();
         void setAll(std::string, std::string, std::string, std::string, std::string, std::string, std::string);
         void setUserName (std::string);
@@ -33,6 +36,7 @@ class User
         std::string getPassword();
         std::string getType();
         std::string getEmail() { return email; }
+        int getNumPaperAssigned() { return numPaperAssigned; }
 
         void display();
 };

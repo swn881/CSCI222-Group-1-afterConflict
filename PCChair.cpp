@@ -1,4 +1,5 @@
 #include "PCChair.h"
+#include "FunctionalitiesManagement.h"
 #include <iostream>
 #include <fstream>
 
@@ -108,6 +109,12 @@ void PCChair::monitorPC()
     cout << endl;
     cout << ">> Going back to menu . . . <<" << endl;
 
+}
+
+void PCChair::functionalityManagement()
+{
+    FuncManagement funcManagement;
+    funcManagement.menu();
 }
 
 void PCChair::obtainMoreDetails(User user)

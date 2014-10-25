@@ -1,3 +1,2 @@
-Admin,Admin,pek,ng,nph@uowmail.edu.au,UOW,sleep,1234567
-PC,123456,1,1,1,1,1,e10adc3949ba59abbe56e057f20f883e
-PCChair,456789,1,1,1,1,1,e35cf7b66449df565f93c607d5a81d09
+Admin,Admin,pek,ng,nph@uowmail.edu.au,UOW,sleep,0,1234567
+PCChair,123456,wee,ng,swn881,inti subang,games.programming.ai,0,e35cf7b66449df565f93c607d5a81d09

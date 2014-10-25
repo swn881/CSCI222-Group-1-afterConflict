@@ -298,7 +298,7 @@ void UserControl::updateUniversity(string tempUN, string newUniversity)
         string tempUsername = userList[i].getUsername();
         if (tempUN == tempUsername)
         {
-            userList[i].setEmail(newUniversity);
+            userList[i].setUniversity(newUniversity);
             found = true;
         }
         else

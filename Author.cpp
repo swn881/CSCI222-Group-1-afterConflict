@@ -1,10 +1,30 @@
 #include "Author.h"
+#include "PaperManagement.h"
+#include "UserBoundary.h"
 #include <iostream>
 
 using namespace std;
 
-void Author::addPaper(int paperID)
+void Author::changeDetails(std::string currentlyLoggedIn)
 {
-    //save the id of the paper assigned
-    paperAssigned.push_back(paperID);
+    UserBoundary userBoundary;
+    userBoundary.changeDetails(currentlyLoggedIn);
+}
+
+void Author::changePassword(string currentlyLoggedIn)
+{
+    UserBoundary userBoundary;
+    userBoundary.changePassword(currentlyLoggedIn);
+}
+
+void Author::submitPaper()
+{
+    PaperManagement paperManagement;
+    paperManagement.submitPaper();
+}
+
+void Author::modifyPaperSubmission(std::string currentlyLoggedIn)
+{
+    PaperManagement paperManagement;
+    paperManagement.modifyPaperSubmission(currentlyLoggedIn);
 }

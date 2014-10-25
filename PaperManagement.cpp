@@ -5,6 +5,7 @@
 #include <dirent.h>
 #include <fstream>
 #include <sstream>
+#include <limits.h>
 #include "PaperManagement.h"
 #include "ResearchPaper.h"
 #include "User.h"
@@ -103,7 +104,7 @@ void PaperManagement::modifyPaperSubmission(string currentLoggedInUser)
                 cout << "2. Modify the abstract" << endl;
                 cout << "3. Modify the keywords" << endl;
                 cout << "4. Resubmit the paper" << endl;
-                cout << "Choice: " << endl;
+                cout << "Choice: " ;
                 cin >> modifyChoice;
 
                 string tempString;
@@ -111,23 +112,26 @@ void PaperManagement::modifyPaperSubmission(string currentLoggedInUser)
                 {
                     case 1:
                     {
+                        cin.ignore();
                         cout << "Please input the new title: ";
-                        cin >> tempString;
+                        getline(cin, tempString, '\n');
                         researchPaper[i].setTitle(tempString);
                     }
                     break;
                     case 2:
                     {
+                        cin.ignore();
                         cout << "Please input the new abstract: ";
-                        cin >> tempString;
+                        getline(cin, tempString, '\n');
                         researchPaper[i].setAbstract(tempString);
                     }
                     break;
                     case 3:
                     {
+                        cin.ignore();
                         cout << ">>> TO ENTER KEYWORDS FOR THE PAPER, PLEASE SEPERATE EACH KEYWORD BY '.' <<<" << endl;
                         cout << "Please input the new keywords: ";
-                        cin >> tempString;
+                        getline(cin, tempString, '\n');
                         researchPaper[i].setKeywords(tempString);
                     }
                     break;
@@ -142,6 +146,7 @@ void PaperManagement::modifyPaperSubmission(string currentLoggedInUser)
                     }
                 }
             }
+            writeAll(researchPaper, numOfPapers); //writing it into file after editing
         }
     }
     if(hasPaper == false)
@@ -152,6 +157,19 @@ void PaperManagement::modifyPaperSubmission(string currentLoggedInUser)
 
     cout << endl;
     cout << "Going back to the menu. . ." << endl;
+}
+
+void PaperManagement::writeAll(ResearchPaper researchPaper[], int numOfPapers)
+{
+    ofstream outfile;
+    outfile.open("System/Papers/Papers.txt");
+
+    for(int i = 0; i < numOfPapers; i++)
+    {
+        outfile << researchPaper[i];
+    }
+
+    outfile.close();
 }
 
 int PaperManagement::countUser()
@@ -186,21 +204,23 @@ void PaperManagement::submitPaper()
     cout << "Please enter author details. . ." << endl << endl;
     while (choice != 2)
     {
+        cin.ignore();
         //UNI FIRST THEN EMAIL
+        string tempString;
         cout << "Please enter your first name: ";
-        cin >> tempString;
+        getline(cin, tempString, '\n');
         researchPaper.setContributedFirst(tempString);
 
         cout << "Please enter your last name: ";
-        cin >> tempString;
+        getline(cin, tempString, '\n');
         researchPaper.setContributedLast(tempString);
 
         cout << "Please enter your university: ";
-        cin >> tempString;
+        getline(cin, tempString, '\n');
         researchPaper.setContributedUni(tempString);
 
         cout << "Please enter your email: ";
-        cin >> tempString;
+        getline(cin, tempString, '\n');
         researchPaper.setContributedEmail(tempString);
 
         userContributed++;
@@ -231,29 +251,31 @@ void PaperManagement::submitPaper()
         }
     }
     researchPaper.setNumContributors(userContributed);
-
+    cin.ignore();
     //enter details about paper
     cout << endl;
     cout << "Please enter details about paper.  . ." << endl;
 
     cout << "Please enter the title of the paper: ";
-    cin >> tempString;
+    getline(cin, tempString, '\n');
     researchPaper.setTitle(tempString);
 
     cout << "Please enter the abstract of the paper: ";
-    cin >> tempString;
+    getline(cin, tempString, '\n');
     researchPaper.setAbstract(tempString);
 
     cout << ">>> TO ENTER KEYWORDS FOR THE PAPER, PLEASE SEPERATE EACH KEYWORD BY '.' <<<" << endl;
     cout << "Please enter the keywords for the paper: ";
-    cin >> tempString;
+    getline(cin, tempString, '\n');
     researchPaper.setKeywords(tempString);
 
-    writeFile(researchPaper);
+
 
     //enter the file directory now
     transferFile(researchPaper);
 
+    writeFile(researchPaper);
+    cout << "You have successfully submitted a paper! " << endl << endl;
 }
 
 void PaperManagement::transferFile(ResearchPaper researchPaper)

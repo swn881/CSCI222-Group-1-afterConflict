@@ -17,6 +17,15 @@ void PrefManagement::specifyPreference(std::string currentlyLoggedInUser)
     bool check = false;
     ResearchPaper researchPaper[paperNum];
 
+    ifstream infile;
+    infile.open("System/Papers/Papers.txt");
+
+    for(int i = 0; i < paperNum; i++)
+    {
+        infile >> researchPaper[i];
+    }
+    infile.close();
+
     //the vector position would represent the position of the paper in the file (what line is it in), we can check rhe ID directly
     //assuming preference can only be done after paper submissions have been closed
     //must do checking to make sure that paper submissions have been closed

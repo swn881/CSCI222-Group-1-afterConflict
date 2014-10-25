@@ -28,8 +28,10 @@ void UserBoundary::registerUser()
     //check if username exists
     while(check == false)
     {
+        cin.ignore();
+        cout << "There cannot be any spaces in your username." << endl;
         cout << "User name: ";
-        cin >> tempUN;
+        getline(cin, tempUN, '\n');
         if (userControl.checkUN(tempUN))
         {
             check = false;
@@ -43,15 +45,15 @@ void UserBoundary::registerUser()
     }
     check = false;
     cout << "First name: ";
-    cin >> tempFN;
+    getline(cin, tempFN, '\n');
     cout << "Last name: ";
-    cin >> tempLN;
+    getline(cin, tempLN, '\n');
     cout << "Email: ";
-    cin >> tempEmail;
+    getline(cin, tempEmail, '\n');
     cout << "University: ";
-    cin >> tempUni;
+    getline(cin, tempUni, '\n');
     cout << "Expertise: ";
-    cin >> tempExp;
+    getline(cin, tempExp, '\n');
 
     //Implementing password censor from user input
 
@@ -345,13 +347,13 @@ void UserBoundary::changeDetails(string currentLoggedIn)
     {
         cout << "Now currently modifying details for " << currentLoggedIn << endl;
 
-        int choice = 0;
-        while(choice != 9)
+        int choice = 9;
+        while(choice != 0)
         {
             cout << "1. Update email" << endl;
             cout << "2. Update university" << endl;
             cout << "3. Update expertise" << endl;
-            cout << "9. Quit updating" << endl;
+            cout << "0. Quit updating" << endl;
             cout << "Choice: ";
             cin >> choice;
 
@@ -359,33 +361,41 @@ void UserBoundary::changeDetails(string currentLoggedIn)
             {
                 case 1:
                 {
+                    cin.ignore();
                     string tempEmail;
                     cout << "Updating email . . ." << endl;
                     cout << "\nPlease input your new email" << endl;
                     cout << "Email: " ;
-                    cin >> tempEmail;
+                    getline(cin, tempEmail, '\n');
                     userControl.updateEmail(currentLoggedIn, tempEmail);
+                    cout << "\nSuccessful!" << endl << endl;
                 }
                 break;
                 case 2:
                 {
+                    cin.ignore();
                     string tempUniversity;
                     cout << "Updating university. . ." << endl;
                     cout << "\nPlease input your new university" << endl;
-                    cout << "University: " << endl;
-                    cin >> tempUniversity;
+                    cout << "University: ";
+                    getline(cin, tempUniversity, '\n');
+                    userControl.updateUniversity(currentLoggedIn, tempUniversity);
+                    cout << "\nSuccessful!" << endl << endl;
                 }
                 break;
                 case 3:
                 {
+                    cin.ignore();
                     string tempExpertise;
                     cout << "Updating expertise. . ." << endl;
                     cout << "\nPlease input your new expertise" << endl;
-                    cout << "Expertise: " << endl;
-                    cin >> tempExpertise;
+                    cout << "Expertise: ";
+                    getline(cin, tempExpertise, '\n');
+                    userControl.updateExpertise(currentLoggedIn, tempExpertise);
+                    cout << "\nSuccessful!" << endl << endl;
                 }
                 break;
-                case 9:
+                case 0:
                 {
                     cout << "Going back to main menu. . ." << endl;
                 }

@@ -11,6 +11,7 @@ class PCChair : public ProgramCommittee
     public:
         void assignPC();
         void monitorPC();
+        void functionalityManagement();
 
         int count();
         void writeFile(User*, int);

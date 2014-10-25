@@ -8,10 +8,10 @@ using namespace std;
 int main()
 {
     SystemMain systemMain;
-    //systemMain.mainPage();
+    systemMain.mainPage();
 
     PaperManagement temp;
-    temp.submitPaper();
+    //temp.submitPaper();
 
     return 0;
 }

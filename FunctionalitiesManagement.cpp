@@ -6,6 +6,7 @@
 #include "ResearchPaper.h"
 #include "User.h"
 #include "Functionalities.h"
+#include "PaperAssignment.h"
 
 using namespace std;
 
@@ -36,6 +37,7 @@ void FuncManagement::menu()
         case 1:
             {
                 cout << "Auto assign papers to reviewers" << endl;
+                autoAssignPapersToReviewers();
             }
             break;
         case 2:
@@ -189,17 +191,19 @@ void FuncManagement::autoAssignPapersToReviewers()
     //if there are 0 matches, we dont use the person; the more matches the better
     //if all have equal matches we randomly select among the people
 
-    vector <string> maybe; //keep track of users who have their preference of MAYBE and YES on each paper
-    vector <string> yes;
+
     int userPreference = 0; //the users preference on the paper
     for(int i = 0; i < paperNum; i++)
     {
+        vector <string> maybe; //keep track of users who have their preference of MAYBE and YES on each paper
+        vector <string> yes;
         for(int j = 0; j < preferenceNum; j++) //at this point we can assume that preference num is equal to the num of users
         {
+
             //we also want to check how many papers the user has been assigned at the current moment
             //if he has already has e.g 5 papers assigned to him
             //then we dont consider him at all
-            if(user[i].getNumPaperAssigned() < functionalities.getPaperReviewerReceive())
+            if(user[j].getNumPaperAssigned() < functionalities.getPaperReviewerReceive())
             {
                 //in the file we will equal number of users who have given their preference
                 //so at this point, auto assignment of preference must have been done
@@ -225,23 +229,117 @@ void FuncManagement::autoAssignPapersToReviewers()
                 }
             }
         }
+        cout << "Paper " <<  i << ": ";
+        for(int e = 0; e < yes.size(); e++)
+            cout << yes[e] << "   ";
+        cout << endl;
+
+        cout << "Paper " <<  i << ": ";
+        for (int t = 0; t < maybe.size(); t++)
+            cout << maybe[t] << "   ";
+        cout << endl;
+
         //by the end of this for loop we will have recorded each users preference on paper 1 (ON FIRST ENTRY)
         //we check the size of the YES vector with the number of reviewers that can be assigned to the paper (HOW MANY REVIEWERS EACH PAPER CAN RECEIVE)
-
-        //HOW DO WE KEEP TRACK OF HOW MANY PAPERS A USER HAS BEEN ASSIGNED WITH?
-
+        vector<string> confirmed; //this will contain the list of confirmed users to be assigned the paper *****
         if (yes.size() == functionalities.getReviewerPaperReceive())
         {
             //if the size if equal then we can just assigned these set of users with the paper
-//*****************************************************//
+            //at this point we have already considered the num of papars each reviewer has currently been assigned with
+            //to assign these users with this paper, we have to add the number of papers they have been assigned by 1,
+            //add into the vector of the user class, the id of the paper
+            //write it into the text file with the paper ID and the users that has been assigned with this paper
+
+            cout << yes.size() << "   " << recordNum << endl;
+            for (int r = 0; r < yes.size(); r++)
+            {
+
+                bool check = false;
+                for(int q = 0; q < recordNum; q++)
+                {
+                    //find the users class, look through the list of users
+                    if (yes[r] == user[q].getUsername())
+                    {
+                        //if equals this is the class of that user that we are trying to modify
+                        user[q].addNumPaperAssigned();
+                        user[q].addPaperAssigned(researchPaper[i].getPaperID()); //get the id of the paper
+                        check = true; //move on to the next in the yes list
+                    }
+                }
+            }
+            //at this point all users that is assigned this paper has been updated!
+            //we update the users at the end of all this
+            //should we update the paper assignment class here? F YEAH
+
+            //initialize the paper assignment class, this class stores the paper id, the user assigned to this paper and their reviews
+            PaperAssignment paperAssignment;
+            paperAssignment.setPaperID(researchPaper[i].getPaperID());
+            paperAssignment.setNumAssignedForReview(yes.size());
+            for(int w = 0;  w < yes.size(); w++)
+            {
+                paperAssignment.addUser(yes[w]);
+            }
+
+            writeAssignment(paperAssignment);
         }
+        else if (yes.size() < functionalities.getReviewerPaperReceive())
+        {
+            //do a while loop here, to make sure that the size of the vector matches the number we need
+            //if it is lesser, then we have to consider the users who gave preference of maybe.
+            //check how many users from the maybe that we need,
+            //choose the best candidate to be assigned as the reviewer for the paper based on their expertise
+            while (yes.size != functionalities.getReviewerPaperReceive())
+            {
+                //check the list of maybe now
+                //check the paper keywords and user expertise
+
+                for (int w = 0; w < maybe.size(); w++)
+                {
+                    bool check = false;
+                    for(int q = 0; q < recordNum; q++)
+                    {
+                        //find the users class, look through the list of users
+                        if (maybe[w] == user[q].getUsername())
+                        {
+                            //if equals this is the user who we want to get his expertise from
+                            userExpertise = user[q].getExpertise();
+
+                            //since i saved the expertise in 1 string, each expertise seperated with ., i need to split the keywords
+                            vector <string> expertise;
+
+
+
+                            check = true; //move on to the next in the yes list
+                        }
+                    }
+                }
+
+            }
+
+
+            //we assign all those in yes vector as the confirmed reviewers, add the number of papers they have been assigned
+            //also add it into vector inside the user class the id of the paper
+            //write it into text file
+        }
+//        else if (yes.size() > functionalities.getReviewerPaperReceive())
+//        {
+//            //if it is more than, then we have to consider the best suited users for the paper
+//            //based on the keywords and expertise
+//        }
     }
+    //dont forget to write to file
 }
 
-void FuncManagement::checkNumPaperAssigned(string user)
+void FuncManagement::writeAssignment(PaperAssignment paperAssignment)
 {
-    //function to check how many paper user has been assigned
+    ofstream outfile;
+    outfile.open("System/PaperAssignment.txt");
+
+    outfile << paperAssignment;
+
+    outfile.close();
 }
+
 
 //remember to read from file then write to file to ensure getting the latest version of the file;
 void FuncManagement::enableAutResponse()

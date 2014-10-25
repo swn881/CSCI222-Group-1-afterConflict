@@ -538,7 +538,7 @@
 	<iostream>
 	<vector>
 
-1414213815 c:\users\ng\documents\github\csci222-group-1-afterconflict\user.h
+1414215097 c:\users\ng\documents\github\csci222-group-1-afterconflict\user.h
 	<iostream>
 	<string>
 	<vector>
@@ -587,12 +587,12 @@
 	"ResearchPaper.h"
 	"User.h"
 
-1414117622 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.cpp
+1414216489 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.cpp
 	<iostream>
 	<stdlib.h>
 	"PaperReview.h"
 
-1414117592 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.h
+1414216489 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.h
 	<iostream>
 
 1414211424 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
@@ -682,7 +682,7 @@
 1414144139 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalities.h
 	<iostream>
 
-1414211229 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
+1414219734 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
 	<iostream>
 	<stdlib.h>
 	<fstream>
@@ -691,17 +691,21 @@
 	"ResearchPaper.h"
 	"User.h"
 	"Functionalities.h"
+	"PaperAssignment.h"
 
-1414211229 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.h
+1414217915 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.h
 	<iostream>
 	"Functionalities.h"
+	"PaperAssignment.h"
 
-1414150322 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperassignment.cpp
+1414217088 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperassignment.cpp
 	<iostream>
 	<stdlib.h>
 	"PaperAssignment.h"
+	"PaperReview.h"
 
-1414150236 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperassignment.h
+1414217721 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperassignment.h
 	<iostream>
 	<vector>
+	"PaperReview.h"
 

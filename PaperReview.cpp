@@ -7,14 +7,14 @@ using namespace std;
 ostream& operator << (ostream& out, PaperReview& temp)
 {
     //first add in the paper id and who reviewed it, then print all other details about the review
-    out << temp.paperID << "," << temp.reviewedBy << ",";
+    out << temp.reviewedBy << ",";
     out << temp.strengths << "," << temp.weakness << ",";
     out << temp.comments << "," << temp.suitability << ",";
     out << temp.pcRemarks << "," << temp.overall << ",";
     out << temp.reviewerConfidence << "," << temp.relevance << ",";
     out << temp.originality << ",";
     out << temp.significance << "," << temp.presentation << ",",
-    out << temp.technicalQuality << "," << temp.evaluation << endl;
+    out << temp.technicalQuality << "," << temp.evaluation << ",";
 
     return out;
 }
@@ -23,8 +23,6 @@ ostream& operator << (ostream& out, PaperReview& temp)
 istream& operator >> (istream& in, PaperReview& temp)
 {
     string tempString;
-    getline(in, tempString, ',');
-    temp.paperID = atoi(tempString.c_str());
 
     getline(in, temp.reviewedBy, ',');
     getline(in, temp.strengths, ',');

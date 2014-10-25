@@ -36,8 +36,11 @@ class User
         std::string getPassword();
         std::string getType();
         std::string getEmail() { return email; }
+        std::string getExpertise() { return expertise; }
         int getNumPaperAssigned() { return numPaperAssigned; }
 
+        void addNumPaperAssigned() { numPaperAssigned++; }
+        void addPaperAssigned(int temp) { paperAssigned.push_back(temp); }
         void display();
 };
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Functionalities.h"
+#include "PaperAssignment.h"
 
 #ifndef _FUNCMANAGEMENT
 #define _FUNCMANAGEMENT
@@ -20,7 +21,7 @@ class FuncManagement
         void enableRevDiscussion(); //enable review discussion among reviewers
 
         void autoAssignPapersToReviewers();
-        void checkNumPaperAssigned(std::string);
+        void writeAssignment(PaperAssignment);
 
         int countPaper();
         int countUser();

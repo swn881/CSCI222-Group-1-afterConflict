@@ -8,7 +8,6 @@ class PaperReview
     friend std::ostream& operator << (std::ostream&, PaperReview&);
     friend std::istream& operator >> (std::istream&, PaperReview&);
     private:
-        int paperID;
         std::string reviewedBy;
 
         std::string strengths;

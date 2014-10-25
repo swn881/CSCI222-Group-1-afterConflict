@@ -538,7 +538,7 @@
 	<iostream>
 	<vector>
 
-1414215097 c:\users\ng\documents\github\csci222-group-1-afterconflict\user.h
+1414221889 c:\users\ng\documents\github\csci222-group-1-afterconflict\user.h
 	<iostream>
 	<string>
 	<vector>
@@ -549,11 +549,10 @@
 	"UserBoundary.h"
 	<iostream>
 
-1414200958 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
+1414234106 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
 	<iostream>
 	"SystemMain.h"
-	"PCChair.h"
-	"PaperManagement.h"
+	"FunctionalitiesManagement.h"
 
 1413965212 c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.h
 	<iostream>
@@ -562,7 +561,7 @@
 	<iostream>
 	"ResearchPaper.h"
 
-1414122434 c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.h
+1414234120 c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.h
 	<iostream>
 	<vector>
 
@@ -682,10 +681,11 @@
 1414144139 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalities.h
 	<iostream>
 
-1414219734 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
+1414244849 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
 	<iostream>
 	<stdlib.h>
 	<fstream>
+	<algorithm>
 	"FunctionalitiesManagement.h"
 	"PreferenceManagement.h"
 	"ResearchPaper.h"
@@ -693,7 +693,7 @@
 	"Functionalities.h"
 	"PaperAssignment.h"
 
-1414217915 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.h
+1414234106 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.h
 	<iostream>
 	"Functionalities.h"
 	"PaperAssignment.h"

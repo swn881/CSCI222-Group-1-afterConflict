@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
+#include <algorithm>
 #include "FunctionalitiesManagement.h"
 #include "PreferenceManagement.h"
 #include "ResearchPaper.h"
@@ -203,45 +204,44 @@ void FuncManagement::autoAssignPapersToReviewers()
             //we also want to check how many papers the user has been assigned at the current moment
             //if he has already has e.g 5 papers assigned to him
             //then we dont consider him at all
-            if(user[j].getNumPaperAssigned() < functionalities.getPaperReviewerReceive())
+            //we must also check the kind of user he is
+            bool check = false; //find the right user and check the num of paper he has been assigned with
+            for(int k = 0; k < recordNum && check == false; k++)
             {
-                //in the file we will equal number of users who have given their preference
-                //so at this point, auto assignment of preference must have been done
-                userPreference = preference[j].getPreference(i);  //user number 1's preference on first paper (ON COMING IN THE FIRST TIME)
-
-                //check his preference on the paper
-                //we will only consider yes, or maybe and push it into the vector
-                /*
-                    preferences:
-                    1. yes
-                    2. no
-                    3. maybe
-                    4. conflict of interest
-
-                */
-                if(userPreference == 1)
+                if(user[k].getUsername() == preference[j].getUsername())
                 {
-                    yes.push_back(preference[j].getUsername());
-                }
-                else if (userPreference == 3)
-                {
-                    maybe.push_back(preference[j].getUsername());
+                    if(user[k].getNumPaperAssigned() < functionalities.getPaperReviewerReceive() && user[k].getType() != "A")
+                    {
+                        //in the file we will equal number of users who have given their preference
+                        //so at this point, auto assignment of preference must have been done
+                        userPreference = preference[j].getPreference(i);  //user number 1's preference on first paper (ON COMING IN THE FIRST TIME)
+
+                        //check his preference on the paper
+                        //we will only consider yes, or maybe and push it into the vector
+                        /*
+                            preferences:
+                            1. yes
+                            2. no
+                            3. maybe
+                            4. conflict of interest
+
+                        */
+                        if(userPreference == 1)
+                        {
+                            yes.push_back(preference[j].getUsername());
+                        }
+                        else if (userPreference == 3)
+                        {
+                            maybe.push_back(preference[j].getUsername());
+                        }
+                    }
                 }
             }
-        }
-        cout << "Paper " <<  i << ": ";
-        for(int e = 0; e < yes.size(); e++)
-            cout << yes[e] << "   ";
-        cout << endl;
 
-        cout << "Paper " <<  i << ": ";
-        for (int t = 0; t < maybe.size(); t++)
-            cout << maybe[t] << "   ";
-        cout << endl;
+        }
 
         //by the end of this for loop we will have recorded each users preference on paper 1 (ON FIRST ENTRY)
         //we check the size of the YES vector with the number of reviewers that can be assigned to the paper (HOW MANY REVIEWERS EACH PAPER CAN RECEIVE)
-        vector<string> confirmed; //this will contain the list of confirmed users to be assigned the paper *****
         if (yes.size() == functionalities.getReviewerPaperReceive())
         {
             //if the size if equal then we can just assigned these set of users with the paper
@@ -281,59 +281,203 @@ void FuncManagement::autoAssignPapersToReviewers()
             }
 
             writeAssignment(paperAssignment);
+
+            //*************//
+            //update user class for the amount of paper they receive and such
         }
-        else if (yes.size() < functionalities.getReviewerPaperReceive())
+        else if (yes.size() < functionalities.getReviewerPaperReceive()) //we dont have enough users for the paper
         {
             //do a while loop here, to make sure that the size of the vector matches the number we need
             //if it is lesser, then we have to consider the users who gave preference of maybe.
             //check how many users from the maybe that we need,
             //choose the best candidate to be assigned as the reviewer for the paper based on their expertise
-            while (yes.size != functionalities.getReviewerPaperReceive())
+            int numOfMaybe = maybe.size();
+            vector<string> keywords = stringSplit(researchPaper[i].getKeywords());
+
+            vector<int>wordsMatching; //the position of this would be equivalent to the maybe user position
+            for (int w = 0; w < maybe.size(); w++)
             {
                 //check the list of maybe now
                 //check the paper keywords and user expertise
-
-                for (int w = 0; w < maybe.size(); w++)
+                bool check = false;
+                for(int q = 0; q < recordNum && check == false; q++)
                 {
-                    bool check = false;
-                    for(int q = 0; q < recordNum; q++)
+                    //find the users class, look through the list of users
+                    if (maybe[w] == user[q].getUsername()) //-1 means we have already selected this user before
                     {
-                        //find the users class, look through the list of users
-                        if (maybe[w] == user[q].getUsername())
+                        //if equals this is the user who we want to get his expertise from
+                        //since i saved the expertise in 1 string, each expertise seperated with ., i need to split the keywords
+                        vector<string> expertise = stringSplit(user[q].getExpertise());
+
+                        //at this point we will have the expertise of the user and the keywords of the paper
+
+                        int matching = 0;
+                        for (int f = 0; f < expertise.size(); f++)
                         {
-                            //if equals this is the user who we want to get his expertise from
-                            userExpertise = user[q].getExpertise();
-
-                            //since i saved the expertise in 1 string, each expertise seperated with ., i need to split the keywords
-                            vector <string> expertise;
-
-
-
-                            check = true; //move on to the next in the yes list
+                            //cout << expertise[f] <<endl;
+                            for(int t = 0; t < keywords.size(); t++)
+                            {
+                                if (expertise[f] == keywords[t])
+                                {
+                                    matching++;
+                                }
+                            }
                         }
+                        wordsMatching.push_back(matching);
+                        check = true; //move on to the next in the yes list
                     }
                 }
-
             }
+            while (yes.size() != functionalities.getReviewerPaperReceive() && numOfMaybe != 0)
+            {
+                //at this point we will know how well matched each user in MAYBE is to the paper
+                //now we find the person with the highest value
+                int highest = 0;
+                int position = 0;
+                for(int w = 0; w < wordsMatching.size(); w++)
+                {
+                    cout << "Here: " << wordsMatching[w] << endl;
+                    if(maybe[w] != "-1" && wordsMatching[w] >= highest)
+                    {
 
-
+                        highest = wordsMatching[w];
+                        position = w;
+                        cout << "position " << w << endl;
+                    }
+                }
+                //we would know which is the highest
+                yes.push_back(maybe[position]); //push the user with the highest match into the yes vector
+                maybe[position] = "-1";
+                numOfMaybe --;
+            }
             //we assign all those in yes vector as the confirmed reviewers, add the number of papers they have been assigned
             //also add it into vector inside the user class the id of the paper
             //write it into text file
+
+            PaperAssignment paperAssignment;
+            paperAssignment.setPaperID(researchPaper[i].getPaperID());
+            paperAssignment.setNumAssignedForReview(yes.size());
+            for(int w = 0;  w < yes.size(); w++)
+            {
+                cout << yes[w] << endl;
+                paperAssignment.addUser(yes[w]);
+            }
+
+            writeAssignment(paperAssignment);
         }
-//        else if (yes.size() > functionalities.getReviewerPaperReceive())
-//        {
-//            //if it is more than, then we have to consider the best suited users for the paper
-//            //based on the keywords and expertise
-//        }
+        else if (yes.size() > functionalities.getReviewerPaperReceive()) //we have way too many user to assign to a particular paper
+        {
+
+            //if it is more than, then we have to consider the best suited users for the paper
+            //based on the keywords and expertise
+            vector<string> keywords = stringSplit(researchPaper[i].getKeywords());
+            vector<string> confirmed; //this will contain the list of confirmed users to be assigned the paper, USED SINCE YES VECTOR HAS MORE THAN WE NEED
+
+            vector<int>wordsMatching; //keep track of how many match of each user in yes has
+            for(int w = 0; w < yes.size(); w++)
+            {
+                bool check = false;
+                //look through each in the yes vector and find the user with most matching expertise to the keyword of the paper
+                for(int e = 0; e < recordNum && check == false; e++)
+                {
+                    if(yes[w] == user[e].getUsername()) //if the username matches we want to get his expertise
+                    {
+                        //get his expertise
+                        vector<string> expertise = stringSplit(user[e].getExpertise());
+
+                        int matching = 0;
+                        for(int r = 0; r < expertise.size(); r++)
+                        {
+                            for(int t = 0; t < keywords.size(); t++)
+                            {
+                                if (expertise[r] == keywords[t])
+                                {
+                                    matching++;
+                                }
+                            }
+                        }
+                        wordsMatching.push_back(matching);
+                        check = true;
+                    }
+                }
+            }
+            //at this point we will know how well each user in the YES vector matches to the paper
+
+            int position;
+            int highest = 0;
+            while(confirmed.size() != functionalities.getReviewerPaperReceive()) //while we havent chose the best number of users for the paper
+            {
+                for(int w = 0; w < wordsMatching.size(); w++)
+                {
+                    if (wordsMatching[w] != -1 && wordsMatching[w] > highest)
+                    {
+                        highest = wordsMatching[w];
+                        position = w;
+                    }
+                }
+                //take the one with the highest, put into the confirmed vector, then get the 2nd best
+                confirmed.push_back(yes[position]);
+                wordsMatching[position] = -1; //change the values so that you will not get the same again
+            }
+
+            PaperAssignment paperAssignment;
+            paperAssignment.setPaperID(researchPaper[i].getPaperID());
+            paperAssignment.setNumAssignedForReview(confirmed.size());
+            for(int w = 0;  w < confirmed.size(); w++)
+            {
+                paperAssignment.addUser(confirmed[w]);
+            }
+
+            writeAssignment(paperAssignment);
+
+        }
     }
     //dont forget to write to file
+}
+
+vector<string> FuncManagement::stringSplit(string toSplit)
+{
+    //since we take in expertise as 1.1.1.1 WE NEED to split them apart
+    bool isEnd = false;
+    int charOccur = 0;
+    int delimOccur = 0;
+    string tempString;
+    vector<string> words;
+
+    while(isEnd == false)
+    {
+        if(charOccur > toSplit.length())
+        {
+            isEnd = true;
+        }
+        else
+        {
+            charOccur = toSplit.find_first_not_of(".", delimOccur);
+            if(charOccur == string::npos)
+            {
+                isEnd = true;
+            }
+            else
+            {
+                delimOccur = toSplit.find_first_of(".", charOccur);
+
+                if(delimOccur == string::npos)
+                {
+                    delimOccur = toSplit.length();
+                }
+                tempString = string(toSplit, charOccur, delimOccur - charOccur);
+
+                words.push_back(tempString);
+            }
+        }
+    }
+    return words;
 }
 
 void FuncManagement::writeAssignment(PaperAssignment paperAssignment)
 {
     ofstream outfile;
-    outfile.open("System/PaperAssignment.txt");
+    outfile.open("System/PaperAssignment.txt", ios::app);
 
     outfile << paperAssignment;
 

@@ -30,6 +30,8 @@ class FuncManagement
         void loadFunctionalities(Functionalities&); //read from functionalities
         void writeFunctionalities(Functionalities&); //write to functionalities file the new changes
 
+        std::vector<std::string> stringSplit(std::string);
+
         void menu();
 };
 

@@ -36,6 +36,7 @@ class ResearchPaper
 
         int getPaperID();
         int getApproval();
+        std::string getKeywords() { return keywords; }
 
         bool checkEmail(std::string);
         void display();

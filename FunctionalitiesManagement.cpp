@@ -208,7 +208,19 @@ void FuncManagement::autoAssignPapersToReviewers()
             bool check = false; //find the right user and check the num of paper he has been assigned with
             for(int k = 0; k < recordNum && check == false; k++)
             {
-                if(user[k].getUsername() == preference[j].getUsername())
+                //we need to make sure the user we are considering to assign the paper
+                //is not the person who submitted the paper;
+                bool isAuthor = false;
+                vector<string> authorEmails = researchPaper[i].getContributedEmail();
+                for (int l = 0; l < authorEmails.size() && isAuthor == false; l++)
+                {
+                    if (authorEmails[l] == user[k].getEmail()) //means he is the author for the paper
+                    {
+                        isAuthor = true;
+                    }
+                }
+
+                if(isAuthor == false && user[k].getUsername() == preference[j].getUsername())
                 {
                     if(user[k].getNumPaperAssigned() < functionalities.getPaperReviewerReceive() && user[k].getType() != "A")
                     {

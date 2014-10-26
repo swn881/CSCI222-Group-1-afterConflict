@@ -28,6 +28,8 @@ class PaperAssignment
         std::vector<std::string> getUserList() { return userList; }
         int getNumUserReviewed() { return numUserReviewed; }
         std::vector<PaperReview*> getUserReview() { return userReview; }
+
+        int getPaperID() { return paperID; }
 };
 
 #endif // _PAPERASSIGNMENT_

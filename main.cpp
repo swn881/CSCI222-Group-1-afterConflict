@@ -7,10 +7,10 @@ using namespace std;
 int main()
 {
     SystemMain systemMain;
-    //systemMain.mainPage();
+    systemMain.mainPage();
 
     PaperManagement paperManagement;
-    paperManagement.modifyReview("Admin");
+    //paperManagement.monitorPC();
 
     return 0;
 }

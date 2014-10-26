@@ -25,7 +25,7 @@ class Preference
         std::string getUsername();
         int countPaper();
         int getPreference(unsigned int);
-
+        std::vector<int> getAllPreference() { return preference; }
 };
 
 #endif // _PREFERENCE_

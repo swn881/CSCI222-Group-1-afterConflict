@@ -11,6 +11,7 @@
 #include "ResearchPaper.h"
 #include "User.h"
 #include "PaperAssignment.h"
+#include "Preference.h"
 
 using namespace std;
 
@@ -22,6 +23,332 @@ string ExePath()
     string::size_type pos = string( buffer ).find_last_of("\\/");
     return string(buffer).substr(0, pos);
 }
+
+void PaperManagement::monitorPC()
+{
+    int recordNum = countUser();
+    User user[recordNum];
+
+    ifstream infile;
+    infile.open("System/UserList.txt");
+    for(int i = 0; i < recordNum; i++)
+    {
+        infile >> user[i];
+    }
+    infile.close();
+    //read in the user
+
+    int reviewNum = countPaper();
+    PaperAssignment paperAssignment[reviewNum];
+
+    infile.open("System/PaperAssignment.txt");
+    for(int i = 0; i < reviewNum; i++)
+    {
+        infile >> paperAssignment[i];
+    }
+    infile.close();
+    //read in the file that has paper assignments and the review;
+
+    int preferenceNum = countPreference(); //preferences are only given by PCs
+    Preference preference[preferenceNum];
+
+    infile.open("System/Preference.txt");
+    for(int i = 0; i < preferenceNum; i++)
+    {
+        infile >> preference[i];
+    }
+    infile.close();
+    //preference of each users loaded
+
+    int paperNum = countPaper();
+    ResearchPaper researchPaper[paperNum];
+
+    infile.open("System/Papers/Papers.txt");
+    for(int i = 0; i < paperNum; i++)
+    {
+        infile >> researchPaper[i];
+    }
+    infile.close();
+    //read in the papers
+
+    vector<User> userList;
+    //i should sieve out users who have the role of authors and put them into a vector
+    for(int i = 0; i < recordNum; i++)
+    {
+        if (user[i].getType() != "A") //not author
+        {
+            userList.push_back(user[i]);
+        }
+    }
+    //we have the list of users, excluding authors
+    cout << "Monitor PCs! O.O" << endl << endl;
+    int choice = 9;
+    while(choice != 0)
+    {
+        cout << "What would you like to view? " << endl;
+        cout << "1. Number of papers assigned to each Program Committee" << endl;
+        cout << "2. Paper assigned to each PC" << endl;
+        cout << "3. Paper which has been reviewed by each PC" << endl;
+        cout << "4. Paper which has not been reviewed by each PC" << endl;
+        cout << "5. Reviews on paper wrote by each PC" << endl;
+        cout << "6. Preferences on each paper by each PC" << endl;
+        cout << "0. Exit" << endl;
+        cout << "Choice: ";
+        cin >> choice;
+
+        switch(choice)
+        {
+            case 1:
+            {
+                cout << "Displaying the number of papers assigned to each PC. . ." << endl;
+                for(int i = 0; i < userList.size(); i++)
+                {
+                    cout << "Username: " << userList[i].getUsername() << endl;
+                    cout << "Number of paper assigned: " << userList[i].getNumPaperAssigned() << endl;
+                    cout << endl;
+                }
+                cout << endl;
+            }
+            break;
+            case 2:
+            {
+                cout << "Displaying paper assigned to each PC" << endl;
+                for(int i = 0; i < userList.size(); i++)
+                {
+                    cout << "Username: " << userList[i].getUsername() << endl;
+                    cout << "Paper assigned: ";
+                    vector<int> paperAssigned = userList[i].getPaperAssigned();
+                    for(int k = 0; k < paperAssigned.size(); k++)
+                    {
+                        if (k == (paperAssigned.size() - 1)) //means its the last record, dont display the comma
+                        {
+                            cout << paperAssigned[k] << endl;
+                        }
+                        else
+                        {
+                            cout << paperAssigned[k] << ",";
+                        }
+                    }
+                    cout << endl;
+                }
+            }
+            break;
+            case 3:
+            {
+                cout << "Displaying paper which has been reviewed by each PC. . ." << endl;
+                for(int i = 0; i < userList.size(); i++)
+                {
+                    cout << "Username: >>>>>> " << userList[i].getUsername() << " <<<<<<" << endl;
+                    //check through each user, find out which paper they have been assigned, then check if they reviewed it or not
+                    for(int k = 0; k < reviewNum; k++) //number of papers
+                    {
+                        int numOfReviewers = paperAssignment[k].getNumAssignedForReview(); //what is the number of assigned users to this paper?
+                        if (numOfReviewers != 0 ) //there are reviewers for the paper
+                        {
+                            vector<PaperReview*> userReviewed;
+                            vector<string>reviewerList = paperAssignment[k].getUserList(); //get the list of users assigned this paper
+                            if(find(reviewerList.begin(), reviewerList.end(), userList[i].getUsername()) != reviewerList.end()) //he is one of those assigned to this paper
+                            {
+                                //means the user has been assigned this paper
+                                int numOfReviews = paperAssignment[k].getNumUserReviewed(); //number of reviews done on this paper
+                                bool hasReviewed = false;
+
+                                if(numOfReviews == 0) //if 0 no reviews have been done on this paper yet
+                                {
+                                    hasReviewed = false;
+                                }
+                                else if (numOfReviewers != 0) //there are reviews done on this paper, we need to know if the current user we checking
+                                    //actually was one of them that reviewed it
+                                {
+                                    userReviewed = paperAssignment[k].getUserReview();
+                                    for(int q = 0; q < numOfReviews && hasReviewed == false; q++)
+                                    {
+                                        if(userList[i].getUsername() == userReviewed[q]->getReviewedBy())
+                                        {
+                                            hasReviewed = true; //the user did indeed review this paper
+                                        }
+                                    }
+                                }
+
+                                if (hasReviewed)
+                                {
+                                    cout << "Paper reviewed: " << paperAssignment[k].getPaperID() << endl;
+                                }
+                            }
+                        }
+                    }
+                    cout << endl;
+                }
+            }
+            break;
+            case 4:
+            {
+                cout << "Displaying paper which has not been reviewed by each PC. . ." << endl;
+                for(int i = 0; i < userList.size(); i++)
+                {
+                    cout << "Username: >>>>>> " << userList[i].getUsername() << " <<<<<<" << endl;
+                    //check through each user, find out which paper they have been assigned, then check if they reviewed it or not
+                    for(int k = 0; k < reviewNum; k++) //number of papers
+                    {
+                        int numOfReviewers = paperAssignment[k].getNumAssignedForReview(); //what is the number of assigned users to this paper?
+                        if (numOfReviewers != 0 ) //there are reviewers for the paper
+                        {
+                            vector<PaperReview*> userReviewed;
+                            vector<string>reviewerList = paperAssignment[k].getUserList(); //get the list of users assigned this paper
+                            if(find(reviewerList.begin(), reviewerList.end(), userList[i].getUsername()) != reviewerList.end()) //he is one of those assigned to this paper
+                            {
+                                //means the user has been assigned this paper
+                                int numOfReviews = paperAssignment[k].getNumUserReviewed(); //number of reviews done on this paper
+                                bool hasReviewed = false;
+
+                                if(numOfReviews == 0) //if 0 no reviews have been done on this paper yet
+                                {
+                                    hasReviewed = false;
+                                }
+                                else if (numOfReviewers != 0) //there are reviews done on this paper, we need to know if the current user we checking
+                                    //actually was one of them that reviewed it
+                                {
+                                    userReviewed = paperAssignment[k].getUserReview();
+                                    for(int q = 0; q < numOfReviews && hasReviewed == false; q++)
+                                    {
+                                        if(userList[i].getUsername() == userReviewed[q]->getReviewedBy())
+                                        {
+                                            hasReviewed = true; //the user did indeed review this paper
+                                        }
+                                    }
+                                }
+
+                                if (!hasReviewed)
+                                {
+                                    cout << "Paper not reviewed: " << paperAssignment[k].getPaperID() << endl;
+                                }
+                            }
+                        }
+                    }
+                    cout << endl;
+                }
+            }
+            break;
+            case 5:
+            {
+                cout << "Displaying reviews on paper wrote by each PC. . ." << endl;
+                for(int i = 0; i < userList.size(); i++)
+                {
+                    cout << "Username: >>>>>> " << userList[i].getUsername() << " <<<<<<" << endl;
+                    //check through each user, find out which paper they have been assigned, then check if they reviewed it or not
+                    for(int k = 0; k < reviewNum; k++) //number of papers
+                    {
+                        int position = 0;
+                        int numOfReviewers = paperAssignment[k].getNumAssignedForReview(); //what is the number of assigned users to this paper?
+                        if (numOfReviewers != 0 ) //there are reviewers for the paper
+                        {
+                            vector<PaperReview*> userReviewed;
+                            vector<string>reviewerList = paperAssignment[k].getUserList(); //get the list of users assigned this paper
+                            if(find(reviewerList.begin(), reviewerList.end(), userList[i].getUsername()) != reviewerList.end()) //he is one of those assigned to this paper
+                            {
+                                //means the user has been assigned this paper
+                                int numOfReviews = paperAssignment[k].getNumUserReviewed(); //number of reviews done on this paper
+                                bool hasReviewed = false;
+
+                                if(numOfReviews == 0) //if 0 no reviews have been done on this paper yet
+                                {
+                                    hasReviewed = false;
+                                }
+                                else if (numOfReviewers != 0) //there are reviews done on this paper, we need to know if the current user we checking
+                                    //actually was one of them that reviewed it
+                                {
+                                    userReviewed = paperAssignment[k].getUserReview();
+                                    for(int q = 0; q < numOfReviews && hasReviewed == false; q++)
+                                    {
+                                        if(userList[i].getUsername() == userReviewed[q]->getReviewedBy())
+                                        {
+                                            position = q;
+                                            hasReviewed = true; //the user did indeed review this paper
+                                        }
+                                    }
+                                }
+
+                                if (hasReviewed)
+                                {
+                                    cout << "Paper reviewed: " << paperAssignment[k].getPaperID() << endl;
+                                    cout << endl;
+                                    cout << "Review: " << endl;
+                                    userReviewed[position]->display();
+                                    cout << endl;
+                                }
+                            }
+                        }
+                    }
+                    cout << endl;
+                }
+            }
+            break;
+            case 6:
+            {
+                cout << "Displaying preferences on each paper by each PC" << endl;
+                for(int i = 0; i < preferenceNum; i++) //based on the number of preferences, which is based on the number of users (EXCLUDING AUTHORS)
+                {
+                    cout << "Username: >>>>>> " << preference[i].getUsername() << " <<<<<<"  << endl;
+                    vector<int> userPreference = preference[i].getAllPreference(); //got the list of ALL preferences of the user
+                    cout << "Preferences on each paper:" << endl;
+                    for(int k = 0; k < paperNum; k++) //based on the number of papers! DIFFERENT
+                    {
+                        researchPaper[k].display();
+                        cout << "Preference for this paper: ";
+                        if (userPreference[k] == 1) //yes
+                        {
+                            cout << "1. Yes" << endl;
+                        }
+                        else if(userPreference[k] == 2)
+                        {
+                            cout << "2. No" << endl;
+                        }
+                        else if (userPreference[k] == 3)
+                        {
+                            cout << "3. Maybe" << endl;
+                        }
+                        else if (userPreference[k] == 4)
+                        {
+                            cout << "4. Conflict of interest" << endl;
+                        }
+                        cout << endl;
+                    }
+                    cout << endl;
+                }
+            }
+            break;
+            case 0:
+            {
+                cout << "Exiting. . ." << endl;
+            }
+            break;
+            default:
+            {
+                cout << "Invalid input" << endl;
+                cout << "Please try again!" << endl;
+            }
+            break;
+        }
+    }
+}
+
+int PaperManagement::countPreference()
+{
+    int recordCount = 0;
+    ifstream infile;
+    infile.open("System/Preference.txt");
+    while (!infile.eof())
+    {
+        string line = " ";
+        getline(infile, line, '\n');
+        if (!line.empty())
+            recordCount++;
+        infile.ignore();
+    }
+    infile.close();
+    return recordCount;
+}
+
 
 void PaperManagement::modifyReview(string currentlyLoggedIn)
 {

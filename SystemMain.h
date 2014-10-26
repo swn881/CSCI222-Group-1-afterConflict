@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Functionalities.h"
 
 #ifndef _SYSTEMMAIN_
 #define _SYSTEMMAIN_
@@ -16,6 +17,7 @@ class SystemMain
         void PCpage();
         void PCChairPage();
 
+        void loadFunctionalities(Functionalities&);
 };
 
 #endif // _SYSTEMMAIN_

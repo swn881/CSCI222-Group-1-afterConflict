@@ -38,6 +38,7 @@ class User
         std::string getEmail() { return email; }
         std::string getExpertise() { return expertise; }
         int getNumPaperAssigned() { return numPaperAssigned; }
+        std::vector<int> getPaperAssigned() { return paperAssigned; }
 
         void addNumPaperAssigned() { numPaperAssigned++; }
         void addPaperAssigned(int temp) { paperAssigned.push_back(temp); }

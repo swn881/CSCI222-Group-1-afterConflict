@@ -1,5 +1,6 @@
 #include "PCChair.h"
 #include "FunctionalitiesManagement.h"
+#include "PaperManagement.h"
 #include <iostream>
 #include <fstream>
 
@@ -69,46 +70,8 @@ void PCChair::loadFile(User* user, int recordNum)
 
 void PCChair::monitorPC()
 {
-    User * user;
-    int recordNum = count();
-    user = new User[recordNum];
-    loadFile(user, recordNum);
-
-    int choice;
-    bool check = false;
-    cout << endl;
-    cout << "Current Program Committees in the system" << endl;
-
-    for(int i = 0; i < recordNum && choice == 2; i++)
-    {
-        if(user[i].getType() == "PC")
-        {
-            cout << ">>>> Program Committees <<<< " << endl;
-            user[i].display();
-
-            cout << endl;
-            cout << "Do you want to view more details about this Program Committee?" << endl;
-            cout << "1. Yes" << endl;
-            cout << "2. No" << endl;
-            cout << "Choice: ";
-            cin >> choice;
-            check = true;
-            if(choice == 1)
-            {
-                obtainMoreDetails(user[i]);
-            }
-        }
-    }
-
-    if(check == false)
-    {
-        cout << endl;
-        cout << ">> There are no Program Committees recorded in the system! <<" << endl;
-    }
-
-    cout << endl;
-    cout << ">> Going back to menu . . . <<" << endl;
-
+    PaperManagement paperManagement;
+    paperManagement.monitorPC();
 }
 
 void PCChair::functionalityManagement()

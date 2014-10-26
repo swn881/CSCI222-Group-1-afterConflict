@@ -23,8 +23,11 @@ class PaperManagement
         int generateID(); //function to generate ID
         int countPaper(); //count number of lines in file
         int countUser();
+        int countPreference();
 
         PaperReview* makeReview(std::string); //the function that populates the review class with the correct review data
+
+        void monitorPC();
 
 };
 

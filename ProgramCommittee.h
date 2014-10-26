@@ -10,6 +10,8 @@ class ProgramCommittee : public Author
 
     public:
         void specifyPreference(std::string);
+        void reviewPaper(std::string);
+        void modifyReview(std::string);
 };
 
 #endif // _PROGRAMCOMMITTEE_

@@ -151,7 +151,8 @@ void SystemMain::PCpage()
         cout << "4. Modify paper submission" << endl;
         cout << "5. Specify preference" << endl;
         cout << "6. Review paper    //nope" << endl;
-        cout << "7. Discuss review  //nope" << endl;
+        cout << "7. Modify review   //nope" << endl;
+        cout << "8. Discuss review  //nope" << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -193,13 +194,19 @@ void SystemMain::PCpage()
             case 6:
             {
                 cout << "You have selected to review paper //NOT IMPLEMENTED" << endl;
+                programCommittee.reviewPaper(currentLoggedInUser);
 
             }
             break;
             case 7:
             {
-                cout << "You have selected to discuss review//NOT IMPLEMENTED" << endl;
+                cout << "You have selected to modify review//NOT IMPLEMENTED" << endl;
 
+            }
+            break;
+            case 8:
+            {
+                cout << "You have selected to discuss review//NOT IMPLEMENTED" << endl;
             }
             break;
             case 0:
@@ -232,12 +239,13 @@ void SystemMain::PCChairPage()
         cout << "4. Modify paper submission" << endl;
         cout << "5. Specify preference" << endl;
         cout << "6. Review paper    //nope" << endl;
-        cout << "7. Discuss review  //nope" << endl;
-        cout << "8. Assign Program Committee" << endl;
-        cout << "9. Monitor PC  //nope" << endl;
-        cout << "10. Check latest events    //nope" << endl;
-        cout << "11. Functionalities management" << endl;
-        cout << "12. Approve papers //nope" << endl;
+        cout << "7. Modify review   //nope" << endl;
+        cout << "8. Discuss review  //nope" << endl;
+        cout << "9. Assign Program Committee" << endl;
+        cout << "10. Monitor PC  //nope" << endl;
+        cout << "11. Check latest events    //nope" << endl;
+        cout << "12. Functionalities management" << endl;
+        cout << "13. Approve papers //nope" << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -279,39 +287,45 @@ void SystemMain::PCChairPage()
             case 6:
             {
                 cout << "You have selected to review paper //NOT IMPLEMENTED" << endl;
+                pcChair.reviewPaper(currentLoggedInUser);
 
             }
             break;
             case 7:
             {
-                cout << "You have selected to discuss review//NOT IMPLEMENTED" << endl;
+                cout << "You have selected to modify review//NOT IMPLEMENTED" << endl;
 
             }
             break;
             case 8:
             {
+                cout << "You have selected to discuss review//NOT IMPLEMENTED" << endl;
+            }
+            break;
+            case 9:
+            {
                 cout << "You have selected to assign program committee" << endl;
                 pcChair.assignPC();
             }
             break;
-            case 9:
+            case 10:
             {
                 cout << "You have selected to monitor the program committee //incomplete" << endl;
                 pcChair.monitorPC();
             }
             break;
-            case 10:
+            case 11:
             {
                 cout << "You have selected to check on the latest events //not implemented" << endl;
             }
             break;
-            case 11:
+            case 12:
             {
                 cout << "You have selected to go to the functionalities management page //not implemented" << endl;
                 pcChair.functionalityManagement();
             }
             break;
-            case 12:
+            case 13:
             {
                 cout << "You have selected to approve/reject papers //not implemented" << endl;
             }

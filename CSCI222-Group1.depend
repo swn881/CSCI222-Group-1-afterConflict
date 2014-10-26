@@ -530,7 +530,7 @@
 	"ProgramCommittee.h"
 	"User.h"
 
-1414211551 c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.h
+1414304953 c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.h
 	"Author.h"
 	<iostream>
 
@@ -549,7 +549,7 @@
 	"UserBoundary.h"
 	<iostream>
 
-1414297975 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
+1414305313 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
 	<iostream>
 	"SystemMain.h"
 	"PaperManagement.h"
@@ -557,10 +557,11 @@
 1413965212 c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.h
 	<iostream>
 
-1414297990 c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.h
+1414307775 c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.h
 	<iostream>
 	"ResearchPaper.h"
 	"PaperReview.h"
+	"PaperAssignment.h"
 
 1414234120 c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.h
 	<iostream>
@@ -574,7 +575,7 @@
 	<cstring>
 	<iostream>
 
-1414294123 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
+1414308168 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
 	<iostream>
 	<windows.h>
 	<fstream>
@@ -589,12 +590,12 @@
 	"User.h"
 	"PaperAssignment.h"
 
-1414216489 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.cpp
+1414308168 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.cpp
 	<iostream>
 	<stdlib.h>
 	"PaperReview.h"
 
-1414297975 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.h
+1414308014 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.h
 	<iostream>
 
 1414211424 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
@@ -626,9 +627,10 @@
 	<iostream>
 	"Preference.h"
 
-1414211551 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.cpp
+1414304953 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\programcommittee.cpp
 	"ProgramCommittee.h"
 	"PreferenceManagement.h"
+	"PaperManagement.h"
 	<iostream>
 
 1414205456 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.cpp
@@ -637,7 +639,7 @@
 	"ResearchPaper.h"
 	<stdlib.h>
 
-1414292267 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
+1414304954 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
 	<iostream>
 	<windows.h>
 	"SystemMain.h"

@@ -23,6 +23,120 @@ string ExePath()
     return string(buffer).substr(0, pos);
 }
 
+void PaperManagement::modifyReview(string currentlyLoggedIn)
+{
+    int reviewNum = countPaper();
+    PaperAssignment paperAssignment [reviewNum];
+
+    ifstream infile;
+    infile.open("System/PaperAssignment.txt");
+
+    for(int i = 0; i < reviewNum; i++)
+    {
+        infile >> paperAssignment[i];
+    }
+
+    infile.close();
+
+    ResearchPaper researchPaper [reviewNum];
+
+    infile.open("System/Papers/Papers.txt");
+
+    for(int i = 0; i < reviewNum; i++)
+    {
+        infile >> researchPaper[i];
+    }
+    infile.close();
+    //at this point we read in the file which contains the papers and their reviewers
+    //and also details about the paper itself
+
+    for(int i = 0; i < reviewNum; i++)
+    {
+        int numOfReviewers = paperAssignment[i].getNumAssignedForReview();
+        if(numOfReviewers != 0) //there are reviewers for the paper
+        {
+            int choice = 0;
+            int position = 0;
+            vector<PaperReview*> userReviewed;
+            vector<string> userList = paperAssignment[i].getUserList(); //get the list of users who reviewed the paper and start comparing them
+            if(find(userList.begin(), userList.end(), currentlyLoggedIn) != userList.end())
+            {
+                int numOfReviews = paperAssignment[i].getNumUserReviewed(); //reviews that had already been done on this paper
+                bool hasReviewed = false;
+                if(numOfReviews == 0) //there are no reviews at all for the paper
+                {
+                    hasReviewed = false;
+                }
+                else if (numOfReviews != 0) //there are some reviews, we need to match the username to the review
+                {
+                    //list of user who has reviewed the paper
+                    userReviewed = paperAssignment[i].getUserReview();
+                    for(int q = 0; q < numOfReviews && hasReviewed == false; q++)
+                    {
+                        if (currentlyLoggedIn == userReviewed[q]->getReviewedBy())
+                        {
+                            //means he has already reviewed the paper
+                            //if he has reviewed, then we can modify the review
+                            hasReviewed = true;
+                            position = q;
+                        }
+                    }
+                }
+                bool check = false;
+                if(hasReviewed) //allow him to modify his review
+                {
+                    while(check == false)
+                    {
+                        cout << endl;
+                        cout << "Do you wish to modify review for this paper?" << endl;
+                        researchPaper[i].display();
+                        cout << endl;
+                        cout << "1. Yes" << endl;
+                        cout << "2. No" << endl;
+                        cout << "3. View the paper review" << endl; //allow the user to see the review that he has done
+                        cout << "Choice: ";
+                        cin >> choice;
+                        switch(choice)
+                        {
+                            case 1:
+                            {
+                                cout << "Modifying review for this paper" << endl;
+                                check = true;
+                                userReviewed[position]->editReview();
+                            }
+                            break;
+                            case 2:
+                            {
+                                cout << "Not modifying review for this paper" << endl;
+                                check = true;
+                            }
+                            break;
+                            case 3:
+                            {
+                                cout << "Displaying paper review done on this paper" << endl;
+                                userReviewed[position]->display();
+                            }
+                            break;
+                            default:
+                            {
+                                cout << "Invalid Input!" << endl;
+                                check = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    researchPaper[i].display();
+                    cout << "You have done no review for this paper!" << endl;
+                }
+            }
+        }
+    }
+    writeAssignment(paperAssignment, reviewNum);
+}
+
+
 void PaperManagement::reviewPaper(string currentlyLoggedIn)
 {
     int reviewNum = countPaper(); //we can assume the number of paers that are assigned is equal to the number of papers submitted
@@ -76,8 +190,9 @@ void PaperManagement::reviewPaper(string currentlyLoggedIn)
                 //if he has move on to next paper or next menu
                 else if (numOfReviews != 0)
                 {
+                    //list of user who has reviewed the paper
                     vector<PaperReview*> userReviewed = paperAssignment[i].getUserReview();
-                    for(int q = 0; q < numOfReviews; q++)
+                    for(int q = 0; q < numOfReviews && hasReviewed == false; q++)
                     {
                         if (currentlyLoggedIn == userReviewed[q]->getReviewedBy())
                         {
@@ -108,6 +223,7 @@ void PaperManagement::reviewPaper(string currentlyLoggedIn)
                                 cout << "Reviewing paper. . ." << endl;
                                 check = true;
                                 paperAssignment[i].addUserReview(makeReview(currentlyLoggedIn));
+                                paperAssignment[i].addNumUserReviewed();
                             }
                             break;
                             case 2:
@@ -127,11 +243,29 @@ void PaperManagement::reviewPaper(string currentlyLoggedIn)
                 }
                 else
                 {
+                    researchPaper[i].display();
+                    cout << endl;
                     cout << "You have already reviewed this paper!" << endl;
                 }
             }
         }
     }
+    //update into file
+    writeAssignment(paperAssignment, reviewNum);
+
+}
+
+void PaperManagement::writeAssignment(PaperAssignment* paperAssignment, int reviewNum)
+{
+    ofstream outfile;
+    outfile.open("System/PaperAssignment.txt");
+
+    for(int i = 0; i < reviewNum; i++)
+    {
+        outfile << paperAssignment[i];
+    }
+
+    outfile.close();
 }
 
 PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
@@ -145,24 +279,29 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "What are the strengths of the paper? " << endl;
     cout << "Strengths: ";
     getline(cin, tempString, '\n');
+    paperReview->setStrengths(tempString);
 
     cout << "What are the weaknesses of the paper? " << endl;
     cout << "Weakness: ";
     getline(cin, tempString, '\n');
+    paperReview->setWeakness(tempString);
 
     cout << "Ways to improve this paper? " << endl;
     cout << "Improvements: ";
     getline(cin, tempString, '\n');
+    paperReview->setComments(tempString);
 
     cout << "Would this paper be suitable as a short paper? " << endl;
     cout << "1. Yes" << endl;
     cout << "2. No" << endl;
     cout << "Suitability: ";
     getline(cin, tempString, '\n');
+    paperReview->setSuitability(atoi(tempString.c_str()));
 
     cout << "Extra comments. . ." << endl;
     cout << "Reviewer remarks: ";
     getline(cin, tempString, '\n');
+    paperReview->setPcRemarks(tempString);
 
     cout << "OVERALL EVALUATION: " << endl;
     cout << "3 (strong accept)" << endl;
@@ -174,7 +313,7 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "-3 (strong reject)" << endl;
     cout << "Overall evaluation: ";
     getline(cin, tempString, '\n');
-
+    paperReview->setOverall(atoi(tempString.c_str()));
 
     cout << "REVIEWER'S CONFIDENCE: " << endl;
     cout << "4 (expert)" << endl;
@@ -184,6 +323,7 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "0 (null)" << endl;
     cout << "Reviewer's confidence: ";
     getline(cin, tempString, '\n');
+    paperReview->setReviewerConfidence(atoi(tempString.c_str()));
 
     cout << "RELEVANCE: from 1 (lowest) to 5 (highest) " << endl;
     cout << "5 (Highly Relevant) " << endl;
@@ -193,6 +333,7 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "1 (Not Relevant)" << endl;
     cout << "Relevance: ";
     getline(cin, tempString, '\n');
+    paperReview->setRelevance(atoi(tempString.c_str()));
 
     cout << "ORIGINALITY: from 1 (lowest) to 5 (highest) " << endl;
     cout << "5 (Highly Original) " << endl;
@@ -202,6 +343,7 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "1 (Not Original)" << endl;
     cout << "Originality: ";
     getline(cin, tempString, '\n');
+    paperReview->setOriginality(atoi(tempString.c_str()));
 
     cout << "SIGNIFICANCE: from 1 (lowest) to 5 (highest) " << endl;
     cout << "5 (Highly Significant)" << endl;
@@ -211,6 +353,7 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "1 (Not Significant)" << endl;
     cout << "Significance: ";
     getline(cin, tempString, '\n');
+    paperReview->setSignificance(atoi(tempString.c_str()));
 
     cout << "PRESENTATION: from 1 (lowest) to 5 (highest) " << endl;
     cout << "5 (Excellent)" << endl;
@@ -220,6 +363,7 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "1 (Unreadable)" << endl;
     cout << "Presentation: ";
     getline(cin, tempString, '\n');
+    paperReview->setPresentation(atoi(tempString.c_str()));
 
     cout << "TECHNICAL QUALITY: from 1 (lowest) to 5 (highest) " << endl;
     cout << "5 (Technically Sound)" << endl;
@@ -229,6 +373,7 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "1 (Unsound)" << endl;
     cout << "Technical Quality: ";
     getline(cin, tempString, '\n');
+    paperReview->setTechnicalQuality(atoi(tempString.c_str()));
 
     cout << "EVALUATION: from 1 (lowest) to 5 (highest) " << endl;
     cout << "5 (Thorough Evaluation)" << endl;
@@ -238,6 +383,7 @@ PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
     cout << "1 (No Evaluation)" << endl;
     cout << "Evaluation:  ";
     getline(cin, tempString, '\n');
+    paperReview->setEvaluation(atoi(tempString.c_str()));
 
     return paperReview;
 }

@@ -41,6 +41,9 @@ class PaperReview
         void setPresentation(int temp) { presentation = temp; }
         void setTechnicalQuality(int temp) { technicalQuality = temp; }
         void setEvaluation(int temp) { evaluation = temp; }
+
+        void display();
+        void editReview();
 };
 
 #endif // _PAPERREVIEW_

@@ -10,8 +10,7 @@ int main()
     //systemMain.mainPage();
 
     PaperManagement paperManagement;
-    //paperManagement.reviewPaper("Admin");
-    paperManagement.makeReview("Admin");
+    paperManagement.modifyReview("Admin");
 
     return 0;
 }

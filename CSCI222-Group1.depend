@@ -642,15 +642,17 @@
 	"ResearchPaper.h"
 	<stdlib.h>
 
-1414326566 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
+1414330631 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
 	<iostream>
 	<windows.h>
+	<fstream>
 	"SystemMain.h"
 	"UserBoundary.h"
 	"Author.h"
 	"ProgramCommittee.h"
 	"PCChair.h"
 	"Admin.h"
+	"Functionalities.h"
 
 1413890341 c:\users\ng\documents\github\csci222-group-1-afterconflict\userboundary.h
 	<iostream>

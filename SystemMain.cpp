@@ -85,7 +85,7 @@ void SystemMain::homePage()
 void SystemMain::loadFunctionalities(Functionalities& functionalities)
 {
     ifstream infile;
-    infile.open("System/Functioanlities.txt");
+    infile.open("System/Functionalities.txt");
 
     infile >> functionalities;
 
@@ -328,11 +328,11 @@ void SystemMain::PCpage()
 
 void SystemMain::PCChairPage()
 {
-    Functionalities functionalities;
     int choice = 9;
     PCChair pcChair;
     while(choice != 0)
     {
+        Functionalities functionalities;
         loadFunctionalities(functionalities); //load functionalities
         cout << "What do you wish to do?" << endl;
         cout << "1. Change password" << endl;

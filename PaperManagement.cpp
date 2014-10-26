@@ -6,9 +6,11 @@
 #include <fstream>
 #include <sstream>
 #include <limits.h>
+#include <algorithm>
 #include "PaperManagement.h"
 #include "ResearchPaper.h"
 #include "User.h"
+#include "PaperAssignment.h"
 
 using namespace std;
 
@@ -20,6 +22,226 @@ string ExePath()
     string::size_type pos = string( buffer ).find_last_of("\\/");
     return string(buffer).substr(0, pos);
 }
+
+void PaperManagement::reviewPaper(string currentlyLoggedIn)
+{
+    int reviewNum = countPaper(); //we can assume the number of paers that are assigned is equal to the number of papers submitted
+    PaperAssignment paperAssignment[reviewNum];
+
+    //get the list of papers and their reviewers
+    ifstream infile;
+    infile.open("System/PaperAssignment.txt");
+
+    for(int i = 0; i < reviewNum; i++)
+    {
+        infile >> paperAssignment[i];
+    }
+
+    infile.close();
+
+    ResearchPaper researchPaper[reviewNum];
+
+    infile.open("System/Papers/Papers.txt");
+
+    for(int i = 0; i < reviewNum; i++)
+    {
+        infile >> researchPaper[i];
+    }
+    infile.close();
+    //at this point we read in the file which contains the papers and their reviewers
+    //and also details about the paper itself
+
+    //find the paper that this user has been assigned with
+    for(int i = 0; i < reviewNum; i++) //for each paper, look through each user assigned to that paper
+    {
+        int numOfReviewers = paperAssignment[i].getNumAssignedForReview();
+        if(numOfReviewers != 0) //if there are reviewers assigned to this paper
+        {
+            int choice = 0;
+
+            vector<string> userList = paperAssignment[i].getUserList(); //get the list of users who reviewed the paper and start comparing them
+            if(find(userList.begin(), userList.end(), currentlyLoggedIn) != userList.end())
+            {
+                //you found the user name of the currently logged in among the list of users assigned for this paper
+                //means the user is able to review this paper, we should also check if the user has already reviewed this paper
+                int numOfReviews = paperAssignment[i].getNumUserReviewed(); //reviews that had already been done on this paper
+
+                bool hasReviewed = false; //to allow review of paper or not
+                if(numOfReviews == 0) //no users reviewed yet, then we can just review the paper
+                {
+                    hasReviewed = false;
+                }
+                //if there are users who have reviewed the paper, we need to check if the user currently logged in
+                //has already reviewed this paper or not;
+                //if he has move on to next paper or next menu
+                else if (numOfReviews != 0)
+                {
+                    vector<PaperReview*> userReviewed = paperAssignment[i].getUserReview();
+                    for(int q = 0; q < numOfReviews; q++)
+                    {
+                        if (currentlyLoggedIn == userReviewed[q]->getReviewedBy())
+                        {
+                            //means he has already reviewed the paper
+                            //dont allow him to review again
+                            hasReviewed = true;
+                        }
+                    }
+                }
+                bool check = false;
+
+                if (hasReviewed == false) //if he has not reviewed the paper yet
+                {
+                    while(check == false)
+                    {
+                        researchPaper[i].display();
+
+                        cout << "Do you wish to review this paper? " << endl;
+                        cout << "1. Yes" << endl;
+                        cout << "2. No " << endl;
+                        cout << "Choice: ";
+                        cin >> choice;
+
+                        switch(choice)
+                        {
+                            case 1:
+                            {
+                                cout << "Reviewing paper. . ." << endl;
+                                check = true;
+                                paperAssignment[i].addUserReview(makeReview(currentlyLoggedIn));
+                            }
+                            break;
+                            case 2:
+                            {
+                                cout << "Not reviewing paper . . ." << endl;
+                                check = true;
+                            }
+                            break;
+                            default:
+                            {
+                                cout << "Invalid Input!" << endl;
+                                check = false;
+                            }
+                        }
+                    }
+                //while loop ends here
+                }
+                else
+                {
+                    cout << "You have already reviewed this paper!" << endl;
+                }
+            }
+        }
+    }
+}
+
+PaperReview* PaperManagement::makeReview(std::string currentlyLoggedIn)
+{
+    PaperReview * paperReview = new PaperReview;
+    paperReview->setReviewedBy(currentlyLoggedIn);
+
+    string tempString;
+    cin.ignore();
+
+    cout << "What are the strengths of the paper? " << endl;
+    cout << "Strengths: ";
+    getline(cin, tempString, '\n');
+
+    cout << "What are the weaknesses of the paper? " << endl;
+    cout << "Weakness: ";
+    getline(cin, tempString, '\n');
+
+    cout << "Ways to improve this paper? " << endl;
+    cout << "Improvements: ";
+    getline(cin, tempString, '\n');
+
+    cout << "Would this paper be suitable as a short paper? " << endl;
+    cout << "1. Yes" << endl;
+    cout << "2. No" << endl;
+    cout << "Suitability: ";
+    getline(cin, tempString, '\n');
+
+    cout << "Extra comments. . ." << endl;
+    cout << "Reviewer remarks: ";
+    getline(cin, tempString, '\n');
+
+    cout << "OVERALL EVALUATION: " << endl;
+    cout << "3 (strong accept)" << endl;
+    cout << "2 (accept)" << endl;
+    cout << "1 (weak accept)" << endl;
+    cout << "0 (borderline paper)" << endl;
+    cout << "-1 (weak reject)" << endl;
+    cout << "-2 (reject)" << endl;
+    cout << "-3 (strong reject)" << endl;
+    cout << "Overall evaluation: ";
+    getline(cin, tempString, '\n');
+
+
+    cout << "REVIEWER'S CONFIDENCE: " << endl;
+    cout << "4 (expert)" << endl;
+    cout << "3 (high)" << endl;
+    cout << "2 (medium)" << endl;
+    cout << "1 (low)" << endl;
+    cout << "0 (null)" << endl;
+    cout << "Reviewer's confidence: ";
+    getline(cin, tempString, '\n');
+
+    cout << "RELEVANCE: from 1 (lowest) to 5 (highest) " << endl;
+    cout << "5 (Highly Relevant) " << endl;
+    cout << "4 (Very Relevant) " << endl;
+    cout << "3 (Moderately Relevant) " << endl;
+    cout << "2 (Marginally Relevant) " << endl;
+    cout << "1 (Not Relevant)" << endl;
+    cout << "Relevance: ";
+    getline(cin, tempString, '\n');
+
+    cout << "ORIGINALITY: from 1 (lowest) to 5 (highest) " << endl;
+    cout << "5 (Highly Original) " << endl;
+    cout << "4 (Very Original) " << endl;
+    cout << "3 (Moderately Original) " << endl;
+    cout << "2 (Little Originality) " << endl;
+    cout << "1 (Not Original)" << endl;
+    cout << "Originality: ";
+    getline(cin, tempString, '\n');
+
+    cout << "SIGNIFICANCE: from 1 (lowest) to 5 (highest) " << endl;
+    cout << "5 (Highly Significant)" << endl;
+    cout << "4 (Very Significant) " << endl;
+    cout << "3 (Moderately Significant)" << endl;
+    cout << "2 (Little Significance) " << endl;
+    cout << "1 (Not Significant)" << endl;
+    cout << "Significance: ";
+    getline(cin, tempString, '\n');
+
+    cout << "PRESENTATION: from 1 (lowest) to 5 (highest) " << endl;
+    cout << "5 (Excellent)" << endl;
+    cout << "4 (Well Written) " << endl;
+    cout << "3 (Acceptable)" << endl;
+    cout << "2 (Poor) " << endl;
+    cout << "1 (Unreadable)" << endl;
+    cout << "Presentation: ";
+    getline(cin, tempString, '\n');
+
+    cout << "TECHNICAL QUALITY: from 1 (lowest) to 5 (highest) " << endl;
+    cout << "5 (Technically Sound)" << endl;
+    cout << "4 (Seems Sound)" << endl;
+    cout << "3 (Minor Flaws)" << endl;
+    cout << "2 (Major Flaws) " << endl;
+    cout << "1 (Unsound)" << endl;
+    cout << "Technical Quality: ";
+    getline(cin, tempString, '\n');
+
+    cout << "EVALUATION: from 1 (lowest) to 5 (highest) " << endl;
+    cout << "5 (Thorough Evaluation)" << endl;
+    cout << "4 (Strong Evaluation)" << endl;
+    cout << "3 (Sound Evaluation)" << endl;
+    cout << "2 (Weak Evaluation) " << endl;
+    cout << "1 (No Evaluation)" << endl;
+    cout << "Evaluation:  ";
+    getline(cin, tempString, '\n');
+
+    return paperReview;
+}
+
 
 void PaperManagement::modifyPaperSubmission(string currentLoggedInUser)
 {

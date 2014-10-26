@@ -249,8 +249,6 @@ void FuncManagement::autoAssignPapersToReviewers()
             //to assign these users with this paper, we have to add the number of papers they have been assigned by 1,
             //add into the vector of the user class, the id of the paper
             //write it into the text file with the paper ID and the users that has been assigned with this paper
-
-            cout << yes.size() << "   " << recordNum << endl;
             for (int r = 0; r < yes.size(); r++)
             {
 
@@ -282,8 +280,7 @@ void FuncManagement::autoAssignPapersToReviewers()
 
             writeAssignment(paperAssignment);
 
-            //*************//
-            //update user class for the amount of paper they receive and such
+
         }
         else if (yes.size() < functionalities.getReviewerPaperReceive()) //we dont have enough users for the paper
         {
@@ -314,7 +311,6 @@ void FuncManagement::autoAssignPapersToReviewers()
                         int matching = 0;
                         for (int f = 0; f < expertise.size(); f++)
                         {
-                            //cout << expertise[f] <<endl;
                             for(int t = 0; t < keywords.size(); t++)
                             {
                                 if (expertise[f] == keywords[t])
@@ -336,13 +332,11 @@ void FuncManagement::autoAssignPapersToReviewers()
                 int position = 0;
                 for(int w = 0; w < wordsMatching.size(); w++)
                 {
-                    cout << "Here: " << wordsMatching[w] << endl;
                     if(maybe[w] != "-1" && wordsMatching[w] >= highest)
                     {
 
                         highest = wordsMatching[w];
                         position = w;
-                        cout << "position " << w << endl;
                     }
                 }
                 //we would know which is the highest
@@ -359,15 +353,30 @@ void FuncManagement::autoAssignPapersToReviewers()
             paperAssignment.setNumAssignedForReview(yes.size());
             for(int w = 0;  w < yes.size(); w++)
             {
-                cout << yes[w] << endl;
                 paperAssignment.addUser(yes[w]);
             }
 
             writeAssignment(paperAssignment);
+
+            //updating for each user who has been assigned to the paper, the number of paper he has been assigned, which paper he has been assigned
+            for(int q = 0; q < yes.size(); q++)
+            {
+                bool check = false;
+                for(int w = 0; w < recordNum && check == false; w++)
+                {
+                    if(yes[q] == user[w].getUsername())
+                    {
+                        cout << 111 << endl;
+                        user[w].addNumPaperAssigned();
+                        user[w].addPaperAssigned(researchPaper[i].getPaperID());
+
+                        check = true;
+                    }
+                }
+            }
         }
         else if (yes.size() > functionalities.getReviewerPaperReceive()) //we have way too many user to assign to a particular paper
         {
-
             //if it is more than, then we have to consider the best suited users for the paper
             //based on the keywords and expertise
             vector<string> keywords = stringSplit(researchPaper[i].getKeywords());
@@ -430,10 +439,43 @@ void FuncManagement::autoAssignPapersToReviewers()
 
             writeAssignment(paperAssignment);
 
+
+            //updating for each user who has been assigned to the paper, the number of paper he has been assigned, which paper he has been assigned
+            for(int q = 0; q < yes.size(); q++)
+            {
+                bool check = false;
+                for(int w = 0; w < recordNum && check == false; w++)
+                {
+                    if(yes[q] == user[w].getUsername())
+                    {
+                        user[w].addNumPaperAssigned();
+                        user[w].addPaperAssigned(researchPaper[i].getPaperID());
+
+                        check = true;
+                    }
+                }
+            }
         }
+
     }
     //dont forget to write to file
+    writeUser(user, recordNum); //we need to update the user file
+
 }
+
+void FuncManagement::writeUser(User * user, int recordNum)
+{
+    ofstream outfile;
+    outfile.open("System/UserList.txt");
+
+    for(int i = 0; i < recordNum; i++)
+    {
+        outfile << user[i];
+    }
+
+    outfile.close();
+}
+
 
 vector<string> FuncManagement::stringSplit(string toSplit)
 {

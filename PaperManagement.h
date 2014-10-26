@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ResearchPaper.h"
+#include "PaperReview.h"
 
 #ifndef _PAPERMANAGEMENT_
 #define _PAPERMANAGEMENT_
@@ -11,7 +12,7 @@ class PaperManagement
     public:
         void submitPaper();
         void modifyPaperSubmission(std::string); //pass in the user ID
-        void reviewPaper(std::string);
+        void reviewPaper(std::string); //mostly checking and review actually done on make review
 
         void writeFile(const ResearchPaper&); //write current paper record into file
         void writeAll(ResearchPaper[], int);
@@ -19,6 +20,8 @@ class PaperManagement
         int generateID(); //function to generate ID
         int countPaper(); //count number of lines in file
         int countUser();
+
+        PaperReview* makeReview(std::string); //the function that populates the review class with the correct review data
 };
 
 #endif // _PAPERMANAGEMENT_

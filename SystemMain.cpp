@@ -89,8 +89,8 @@ void SystemMain::authorPage()
         cout << "What do you wish to do?" << endl;
         cout << "1. Change password" << endl;
         cout << "2. Modify personal details" << endl;
-        cout << "3. Submit paper. //not implemented" << endl;
-        cout << "4. Modify paper submission // not implemented" << endl;
+        cout << "3. Submit paper." << endl;
+        cout << "4. Modify paper submission" << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;

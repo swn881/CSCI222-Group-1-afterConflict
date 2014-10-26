@@ -1,3 +1,3 @@
-Admin,Admin,pek,ng,nph@uowmail.edu.au,UOW,games.programming.sleep.asus,0,1234567
-PC,123456,wee,ng,swn881,inti subang,games.ai,0,e10adc3949ba59abbe56e057f20f883e
-PCChair,ngphgn,Pek He,Ng,derp@derpmail.com,uow,fans.house.derp,0,e10adc3949ba59abbe56e057f20f883e
+Admin,Admin,pek,ng,nph@uowmail.edu.au,UOW,games.programming.sleep.asus,1,1002,1234567
+PCChair,123456,wee,ng,swn881,inti subang,games.ai,1,1001,e10adc3949ba59abbe56e057f20f883e
+PCChair,ngphgn,Pek He,Ng,derp@derpmail.com,uow,fans.house.derp,2,1000,1003,e10adc3949ba59abbe56e057f20f883e

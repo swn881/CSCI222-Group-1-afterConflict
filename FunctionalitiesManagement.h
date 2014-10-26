@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Functionalities.h"
 #include "PaperAssignment.h"
+#include "User.h"
 
 #ifndef _FUNCMANAGEMENT
 #define _FUNCMANAGEMENT
@@ -31,6 +32,7 @@ class FuncManagement
         void writeFunctionalities(Functionalities&); //write to functionalities file the new changes
 
         std::vector<std::string> stringSplit(std::string);
+        void writeUser(User*, int); //function to update user file
 
         void menu();
 };

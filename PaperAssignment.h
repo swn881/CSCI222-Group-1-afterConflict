@@ -20,6 +20,14 @@ class PaperAssignment
         void setPaperID (int temp) { paperID = temp; }
         void setNumAssignedForReview (int temp) { numAssignedForReview = temp; }
         void addUser(std::string temp ) { userList.push_back(temp); }
+
+        void addNumUserReviewed() { numUserReviewed ++; }
+        void addUserReview(PaperReview* temp) { userReview.push_back(temp); }
+
+        int getNumAssignedForReview() { return numAssignedForReview; }
+        std::vector<std::string> getUserList() { return userList; }
+        int getNumUserReviewed() { return numUserReviewed; }
+        std::vector<PaperReview*> getUserReview() { return userReview; }
 };
 
 #endif // _PAPERASSIGNMENT_

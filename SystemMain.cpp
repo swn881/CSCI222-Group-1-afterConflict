@@ -192,7 +192,7 @@ void SystemMain::PCpage()
         cout << "5. Specify preference" << endl;
         cout << "6. Review paper  " << endl;
         cout << "7. Modify review " << endl;
-        cout << "8. Discuss review  //nope" << endl;
+        cout << "8. Discuss review  " << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -301,7 +301,8 @@ void SystemMain::PCpage()
             {
                 if (functionalities.getReviewDiscussion() == 1)
                 {
-                    cout << "You have selected to discuss review//NOT IMPLEMENTED" << endl;
+                    cout << "You have selected to discuss review" << endl;
+                    programCommittee.reviewDiscussion(currentLoggedInUser);
                 }
                 else
                 {
@@ -342,10 +343,10 @@ void SystemMain::PCChairPage()
         cout << "5. Specify preference" << endl;
         cout << "6. Review paper   " << endl;
         cout << "7. Modify review  " << endl;
-        cout << "8. Discuss review  //nope" << endl;
+        cout << "8. Discuss review  " << endl;
         cout << "9. Assign Program Committee" << endl;
         cout << "10. Monitor PC " << endl;
-        cout << "11. Check latest events    //nope" << endl;
+        cout << "11. Check latest events  " << endl;
         cout << "12. Functionalities management" << endl;
         cout << "13. Approve papers //nope" << endl;
         cout << "0. Exit" << endl;
@@ -453,7 +454,15 @@ void SystemMain::PCChairPage()
             break;
             case 8:
             {
-                cout << "You have selected to discuss review//NOT IMPLEMENTED" << endl;
+                if (functionalities.getReviewDiscussion() == 1)
+                {
+                    cout << "You have selected to discuss review" << endl;
+                    pcChair.reviewDiscussion(currentLoggedInUser);
+                }
+                else
+                {
+                    cout << "You are not allowed to discuss review" << endl;
+                }
             }
             break;
             case 9:
@@ -471,6 +480,7 @@ void SystemMain::PCChairPage()
             case 11:
             {
                 cout << "You have selected to check on the latest events //not implemented" << endl;
+                pcChair.latestEvents();
             }
             break;
             case 12:
@@ -519,7 +529,7 @@ void SystemMain::adminPage()
         cout << "8. Discuss review " << endl;
         cout << "9. Assign Program Committee" << endl;
         cout << "10. Monitor PC  " << endl;
-        cout << "11. Check latest events    //nope" << endl;
+        cout << "11. Check latest events  " << endl;
         cout << "12. Functionalities management" << endl;
         cout << "13. Approve papers //nope" << endl;
         cout << "14. Assign PC Chairs   //nope" << endl;
@@ -629,8 +639,16 @@ void SystemMain::adminPage()
             break;
             case 8:
             {
-                cout << "You have selected to discuss review //not implemented" << endl;
-                admin.assignPC();
+                if (functionalities.getReviewDiscussion() == 1)
+                {
+                    cout << "You have selected to discuss review" << endl;
+                    admin.reviewDiscussion(currentLoggedInUser);
+                }
+                else
+                {
+                    cout << "You are not allowed to discuss review" << endl;
+                }
+
             }
             break;
             case 9:
@@ -641,13 +659,14 @@ void SystemMain::adminPage()
             break;
             case 10:
             {
-                cout << "You have selected to monitor the program committee //incomplete" << endl;
+                cout << "You have selected to monitor the program committee" << endl;
                 admin.monitorPC();
             }
             break;
             case 11:
             {
-                cout << "You have selected to check on the latest events //not implemented" << endl;
+                cout << "You have selected to check on the latest events" << endl;
+                admin.latestEvents();
             }
             break;
             case 12:

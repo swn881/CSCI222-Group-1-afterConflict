@@ -10,7 +10,7 @@ int main()
     systemMain.mainPage();
 
     PaperManagement paperManagement;
-    //paperManagement.monitorPC();
+    //paperManagement.reviewDiscussion("123456");
 
     return 0;
 }

@@ -17,6 +17,8 @@ class PCChair : public ProgramCommittee
         void writeFile(User*, int);
         void loadFile(User*, int);
         void obtainMoreDetails(User);
+
+        void latestEvents();
 };
 
 #endif // _PCCHAIR_

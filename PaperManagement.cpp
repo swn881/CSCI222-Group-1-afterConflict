@@ -12,6 +12,7 @@
 #include "User.h"
 #include "PaperAssignment.h"
 #include "Preference.h"
+#include "PaperDiscussion.h"
 
 using namespace std;
 
@@ -22,6 +23,305 @@ string ExePath()
     GetModuleFileName( NULL, buffer, MAX_PATH );
     string::size_type pos = string( buffer ).find_last_of("\\/");
     return string(buffer).substr(0, pos);
+}
+
+void PaperManagement::approvePaper(std::string currentlyLoggedIn)
+{
+    //to approve paper i need to make sure the user doesnt approve his own paper
+    //making the assumption that ALL reviews has been done and there can be no more submission of reviews
+
+    //load the papers in, the reviews, and the discussion too
+
+    int paperNum = countPaper();
+    ResearchPaper researchPaper[paperNum];
+    ifstream infile;
+    infile.open("System/Papers/Papers.txt");
+    for(int i = 0; i < paperNum; i++)
+    {
+        infile >> researchPaper[i];
+    }
+    infile.close();
+
+    int discussionNum = countDiscussion();
+    PaperDiscussion paperDiscussion[discussionNum];
+    infile.open("System/PaperDiscsussion.txt");
+    for(int i = 0; i < discussionNum; i++)
+    {
+        infile >> paperDiscussion[i];
+    }
+    infile.close();
+}
+
+void PaperManagement::reviewDiscussion(string currentlyLoggedIn)
+{
+    //this is used for reviewers
+    //check which paper he is assigned with
+    //making the assumption that review submission has already been closed
+    //check who has been assigned to review the same paper
+
+    int reviewNum = countPaper();
+    PaperAssignment paperAssignment[reviewNum];
+
+    ifstream infile;
+    infile.open("System/PaperAssignment.txt");
+    for(int i = 0; i < reviewNum; i++)
+    {
+        infile >> paperAssignment[i];
+    }
+    infile.close();
+
+    int paperNum = reviewNum;
+    ResearchPaper researchPaper [paperNum];
+    infile.open("System/Papers/Papers.txt");
+    for(int i = 0; i < paperNum; i++)
+    {
+        infile >> researchPaper[i];
+    }
+    infile.close();
+    //we have load the file which has paper assignments and also the paper itself
+
+    //gotta check if the paper already has an existing discussion or not
+    int discussionNum = countDiscussion();
+    PaperDiscussion paperDiscussion[discussionNum];
+    infile.open("System/PaperDiscussion.txt");
+    for(int i = 0; i < discussionNum; i++)
+    {
+        infile >> paperDiscussion[i];
+    }
+    infile.close();
+    //we have all the currently existing discussions
+
+    //we have to check what paper he is reviewing
+
+    int paperID = 0;
+    int paperPosition = 0;
+    for(int i = 0; i < reviewNum; i++)
+    {
+        bool isFound = false;
+        int numAssignedReview = paperAssignment[i].getNumAssignedForReview(); //get the number of user assigned to review this paper
+        if (numAssignedReview != 0) //there are assigned users
+        {
+            //get the list of users assigned
+            vector<string> userList = paperAssignment[i].getUserList();
+            if (find(userList.begin(), userList.end(), currentlyLoggedIn) != userList.end()) //we manage to find the username assigned to this paper
+                //to the guy who is trying to do the discussion
+            {
+                int choice = 9;
+                cout << "Do you want to go into discussion for this paper?" << endl;
+                researchPaper[i].display();
+                cout << endl;
+                cout << "1. Yes" << endl;
+                cout << "2. No" << endl;
+                cout << "Choice: ";
+                cin >> choice;
+
+                if (choice == 1)
+                {
+                    //get the id of the paper he is reviewing
+                    isFound = true;
+                    paperID = paperAssignment[i].getPaperID(); //he is reviewing this paper
+                    paperPosition = i; // we want to keep this position around so we can get the reviews easily
+                }
+                else
+                {
+                    //user does not want to check discussion for the paper
+                    cout << "Not going into paper discussion. . ." << endl;
+                }
+            }
+        }
+
+        if (isFound) //we found the paper ID this person is reviewing && user wanted to discuss about this paper
+        {
+            int discussionPosition;
+            //now to check if the paper has existing discusiion, match the id
+            bool isExist = false;
+            for(int j = 0; j < discussionNum && isExist == false; j++)
+            {
+                if(paperDiscussion[j].getPaperID() == paperID)
+                {
+                    //we found a match, means there is an existing discussion
+                    isExist = true;
+                    discussionPosition = j;
+                }
+            }
+
+            if (!isExist) //means we couldnt find a discussion, we should make a new one
+            {
+                PaperDiscussion newDiscussion;
+                newDiscussion.setPaperID(paperID);
+
+                int choice = 9;
+                while (choice != 0)
+                {
+                    cout << "Starting the new discussion . . ." << endl;
+                    cout << "What would you like to do?" << endl;
+                    cout << "1. View other reviewers review on the paper" << endl;
+                    cout << "2. Write about something. . ." << endl;
+                    cout << "0. Quit" << endl;
+                    cout << "Choice: ";
+                    cin >> choice;
+
+                    cout << endl;
+                    if (choice == 1)
+                    {
+                        //display all the reviews done on this paper
+                        int numUserReviewed = paperAssignment[paperPosition].getNumUserReviewed();
+                        if (numUserReviewed != 0)
+                        {
+                            vector<PaperReview*> userReview = paperAssignment[paperPosition].getUserReview();
+                            for (int q = 0; q < numUserReviewed; q++)
+                            {
+                                cout << "User ID: >>>>>> " << userReview[q]->getReviewedBy() << " <<<<<<" << endl;
+                                cout << "Paper Review: " << endl;
+                                userReview[q]->display();
+                            }
+                            cout << endl;
+                        }
+                    }
+                    else if (choice == 2)
+                    {
+                        cin.ignore();
+                        cout << "Start the discussion by writing something!" << endl;
+                        cout << "Comment: ";
+                        string tempString;
+                        getline(cin, tempString, '\n');
+
+                        tempString = currentlyLoggedIn + ": " + tempString; //add it with the id infront so it becomes swn881: discusssion
+                        newDiscussion.addNumReviewerResponse(); //add the number of response by reviewers by 1
+                        newDiscussion.addReviewerDiscussion(tempString);
+                    }
+                    else if (choice == 0)
+                    {
+                        cout << "Exitting!" << endl;
+                        //write discussion into file
+                        ofstream outfile;
+                        outfile.open("System/PaperDiscussion.txt", ios::app);
+
+                        outfile << newDiscussion;
+
+
+                        outfile.close();
+                    }
+                }
+            }
+            else if (isExist)
+            {
+                int choice = 9;
+                while (choice != 0)
+                {
+                    cout << "Participating in the discussion!" << endl;
+                    cout << "What would you like to do? " << endl;
+                    cout << "1. View other discussions" << endl;
+                    cout << "2. View other reviewer's review" << endl;
+                    cout << "3. Write a discussion!" << endl;
+                    cout << "0. Exit" << endl;
+                    cout << "Choice: ";
+                    cin >> choice;
+                    cout << endl;
+                    switch (choice)
+                    {
+                        case 1:
+                        {
+                            cout << "Viewing other discussions. . ." << endl;
+                            //displaying all the discussions in the system
+                            int numReviewerResponse = paperDiscussion[discussionPosition].getNumReviewerResponse();
+                            if (numReviewerResponse != 0)
+                            {
+                                vector<string> reviewerDiscussion = paperDiscussion[discussionPosition].returnReviewerDiscussions();
+                                for(int q = 0; q < numReviewerResponse; q++)
+                                {
+                                    cout << reviewerDiscussion[q] << endl << endl;
+                                }
+                            }
+                            else
+                            {
+                                cout << "No reviewer discussion!" << endl;
+                                //this happens as author is able to give response to the reviews first before the reviewers
+                            }
+                        }
+                        break;
+                        case 2:
+                        {
+                            cout << "View other reviewer's review" << endl;
+                            //display all the reviews done on this paper
+                            int numUserReviewed = paperAssignment[paperPosition].getNumUserReviewed();
+                            if (numUserReviewed != 0)
+                            {
+                                vector<PaperReview*> userReview = paperAssignment[paperPosition].getUserReview();
+                                for (int q = 0; q < numUserReviewed; q++)
+                                {
+                                    cout << "User ID: >>>>>> " << userReview[q]->getReviewedBy() << " <<<<<<" << endl;
+                                    cout << "Paper Review: " << endl;
+                                    userReview[q]->display();
+                                }
+                                cout << endl;
+                            }
+                        }
+                        break;
+                        case 3:
+                        {
+                            cout << "Write a discusion!" << endl;
+                            cin.ignore();
+                            cout << "Write something!" << endl;
+                            cout << "Comment: ";
+                            string tempString;
+                            getline(cin, tempString, '\n');
+
+                            tempString = currentlyLoggedIn + ": " + tempString; //add it with the id infront so it becomes swn881: discusssion
+                            paperDiscussion[discussionPosition].addNumReviewerResponse(); //add the number of response by reviewers by 1
+                            paperDiscussion[discussionPosition].addReviewerDiscussion(tempString);
+                        }
+                        break;
+                        case 0:
+                        {
+                            cout << "Exiting!" << endl;
+                            //write discussion into file
+                            ofstream outfile;
+                            outfile.open("System/PaperDiscussion.txt");
+
+                            for (int i = 0; i < discussionNum; i++)
+                            {
+                                outfile << paperDiscussion[i];
+                            }
+
+                            outfile.close();
+                        }
+                        break;
+                        default:
+                        {
+                            cout << "Invalid input!" << endl;
+                            cout <<"Please try again! " << endl;
+                        }
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+int PaperManagement::countDiscussion()
+{
+    int recordCount = 0;
+    ifstream infile;
+    infile.open("System/PaperDiscussion.txt");
+    while (!infile.eof())
+    {
+        string line = " ";
+        getline(infile, line, '\n');
+        if (!line.empty())
+            recordCount++;
+        infile.ignore();
+    }
+    infile.close();
+    return recordCount;
+}
+
+void PaperManagement::submitAuthorResponse()
+{
+    //this is for author of the papers
+
 }
 
 void PaperManagement::monitorPC()

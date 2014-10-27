@@ -114,3 +114,19 @@ void PCChair::writeFile(User* user, int recordNum)
     }
     outfile.close();
 }
+
+void PCChair::latestEvents()
+{
+    ifstream infile;
+    infile.open("System/Events.txt");
+
+    while (!infile.eof())
+    {
+        string line = " ";
+        getline(infile, line, '\n');
+        if (!line.empty())
+            cout << line << endl;
+    }
+    cout << endl;
+    infile.close();
+}

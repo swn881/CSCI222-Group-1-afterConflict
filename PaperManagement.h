@@ -27,6 +27,12 @@ class PaperManagement
 
         PaperReview* makeReview(std::string); //the function that populates the review class with the correct review data
 
+        void reviewDiscussion(std::string);
+        int countDiscussion();
+        void submitAuthorResponse();
+        void approvePaper(std::string);
+
+
         void monitorPC();
 
 };

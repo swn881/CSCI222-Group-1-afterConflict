@@ -43,6 +43,8 @@
 		<Unit filename="PCChair.h" />
 		<Unit filename="PaperAssignment.cpp" />
 		<Unit filename="PaperAssignment.h" />
+		<Unit filename="PaperDiscussion.cpp" />
+		<Unit filename="PaperDiscussion.h" />
 		<Unit filename="PaperManagement.cpp" />
 		<Unit filename="PaperManagement.h" />
 		<Unit filename="PaperReview.cpp" />

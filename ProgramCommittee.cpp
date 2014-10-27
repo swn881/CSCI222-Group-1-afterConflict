@@ -23,3 +23,9 @@ void ProgramCommittee::modifyReview(std::string currentlyLoggedIn)
     PaperManagement paperManagement;
     paperManagement.modifyReview(currentlyLoggedIn);
 }
+
+void ProgramCommittee::reviewDiscussion(std::string currentlyLoggedIn)
+{
+    PaperManagement paperManagement;
+    paperManagement.reviewDiscussion(currentlyLoggedIn);
+}

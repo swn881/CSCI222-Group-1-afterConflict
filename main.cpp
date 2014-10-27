@@ -10,7 +10,7 @@ int main()
     systemMain.mainPage();
 
     PaperManagement paperManagement;
-    //paperManagement.reviewDiscussion("123456");
+    //paperManagement.approvePaper("ngphgn");
 
     return 0;
 }

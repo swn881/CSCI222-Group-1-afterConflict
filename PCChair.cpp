@@ -130,3 +130,9 @@ void PCChair::latestEvents()
     cout << endl;
     infile.close();
 }
+
+void PCChair::approvePaper(string currentlyLoggedIn)
+{
+    PaperManagement paperManagement;
+    paperManagement.approvePaper(currentlyLoggedIn);
+}

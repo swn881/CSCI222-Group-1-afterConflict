@@ -38,6 +38,10 @@ class ResearchPaper
         int getApproval();
         std::string getKeywords() { return keywords; }
         std::vector<std::string> getContributedEmail() { return contributedEmail; }
+        int getNumContributors() { return numContributors; }
+
+        void setApproval() { approval = 1; }
+        void setReject() { approval = -1; }
 
         bool checkEmail(std::string);
         void display();

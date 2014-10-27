@@ -25,6 +25,35 @@ string ExePath()
     return string(buffer).substr(0, pos);
 }
 
+void PaperManagement::manuallyAssignPaper(string currentlyLoggedIn)
+{
+    int paperNum = countPaper();
+    ResearchPaper researchPaper[paperNum];
+    ifstream infile;
+    infile.open("System/Papers/Papers.txt");
+    for(int i = 0; i < paperNum; i++)
+    {
+        infile >> researchPaper[i];
+    }
+    infile.close();
+
+    int reviewNum = paperNum;
+    PaperAssignment paperAssignment[reviewNum];
+    infile.open("System/PaperAssignment.txt");
+    for(int i = 0; i < reviewNum; i++)
+    {
+        infile >>paperAssignment[i];
+    }
+    infile.close();
+
+    //to manually assign a paper, we must check how many reviewers has been assigned to a apper
+    //displays papers that are allowed to b assigned to a user
+    //we should also check how many papers a reviewer has been assigned
+    //displays users that are allowed to b assigned more papers
+
+}
+
+
 void PaperManagement::approvePaper(std::string currentlyLoggedIn)
 {
     //to approve paper i need to make sure the user doesnt approve his own paper
@@ -44,12 +73,179 @@ void PaperManagement::approvePaper(std::string currentlyLoggedIn)
 
     int discussionNum = countDiscussion();
     PaperDiscussion paperDiscussion[discussionNum];
-    infile.open("System/PaperDiscsussion.txt");
+    infile.open("System/PaperDiscussion.txt");
     for(int i = 0; i < discussionNum; i++)
     {
         infile >> paperDiscussion[i];
     }
     infile.close();
+
+    int reviewNum = paperNum;
+    PaperAssignment paperAssignment[reviewNum];
+    infile.open("System/PaperAssignment.txt");
+    for(int i = 0; i < reviewNum; i++)
+    {
+        infile >> paperAssignment[i];
+    }
+    infile.close();
+    //at this point we have the assignments of each user, the paper, and the discussions
+
+    int recordNum = countUser();
+    User user[recordNum];
+    infile.open("System/UserList.txt");
+    for(int i = 0; i < recordNum; i++)
+    {
+        infile >> user[i];
+    }
+    infile.close();
+
+    //we want to keep track of users who submitted/contributed to the paper, we want to make sure that its not the current
+    //logged in user who is currently approving the papers, DONT WANT HIM TO APPROVE A PAPER HE HIMSELF SUBMITTED
+    int userPosition = 0;
+    string userEmail; //EMAIL OF CURRENTLY LOGGED IN USER
+    //i want to get the email of the currently logged in user
+    for(int j = 0; j < recordNum; j++)
+    {
+        if(user[j].getUsername() == currentlyLoggedIn)
+        {
+            //the id matches, mean this is the person who is currently logged in
+            userPosition = j;
+            userEmail = user[j].getEmail();
+        }
+    }
+
+    //for each paper show details about the user who contributed
+    for (int i = 0; i < paperNum; i++)
+    {
+        bool isContributor = false; //to keep track if he is the contributor of the paper
+        cout << ">>>>>> Paper Details <<<<<<" << endl;
+        researchPaper[i].display();
+
+        for(int j = 0; j < recordNum; j++)
+            //now get the users who actually submitted the paper, match the email
+            //get the number of contributors
+        {
+            vector<string> contributedEmails = researchPaper[i].getContributedEmail();
+            //we got the emails of the user who contributed, now we need to check their emails to know if they submitted the paper or not
+            for (int w = 0; w < contributedEmails.size(); w++)
+            {
+                if (user[j].getEmail() == contributedEmails[w])
+                {
+                    //if we find something, means the current user we in, contributed to the paper.
+                    //display details about thie guy
+                    cout << ">>> Users contributed to this paper <<< " << endl;
+                    user[j].display();
+                    //one extra checking, for the isContributor
+                    if (userEmail == contributedEmails[w])
+                    {
+                        isContributor = true; //the guy currently logged in is the contributor of the paper
+                    }
+                }
+            }
+        }
+        cout << endl;
+        for(int j = 0; j < recordNum; j++)
+        {
+            int numAssigned = user[j].getNumPaperAssigned(); //get the number of assigned paper;
+            if (numAssigned != 0)
+            {
+                vector<int> paperAssigned = user[j].getPaperAssigned();
+                for(int k = 0; k < numAssigned; k++)
+                {
+                    if (paperAssigned[k] == researchPaper[i].getPaperID()) //if the paper ID matches, means they did submit the paper
+                    {
+                        cout << ">>> User assigned this paper <<< " << endl;
+                        user[j].display();
+                    }
+                }
+            }
+            //at this point we get the users who are assigned to each paper TO REVIEW, NOT THOSE WHO SUBMITTED
+        }
+        cout << endl;
+
+        //get the completed reviewsssss
+        //get the review num of each paper
+        int numReviews = paperAssignment[i].getNumUserReviewed();
+        if(numReviews != 0)
+        {
+            vector<PaperReview*> paperReviews = paperAssignment[i].getUserReview();
+            for(int k = 0; k < numReviews; k++)
+            {
+                cout << ">>> Reviews done by user <<< " << endl;
+                cout << "Username: " << paperReviews[k]->getReviewedBy() << endl;
+                paperReviews[k]->display();
+                cout << endl;
+            }
+        }
+
+        bool isFound = false;
+        //get the discussion for the paper
+        for (int j = 0; j < discussionNum && isFound == false; j++)
+        {
+            if(paperDiscussion[j].getPaperID() == researchPaper[i].getPaperID())
+            {
+                cout << "Paper discussions: " << endl;
+                int numReviewerDiscussion = paperDiscussion[j].getNumReviewerResponse();
+                if(numReviewerDiscussion != 0)
+                {
+                    vector<string>reviewerDiscussions = paperDiscussion[j].returnReviewerDiscussions();
+                    for(int k = 0; k < numReviewerDiscussion; k++)
+                    {
+                        cout << reviewerDiscussions[k] << endl;
+                        cout << endl;
+                    }
+                }
+
+                isFound = true;
+            }
+        }
+
+        if (isContributor == false)
+        {
+            bool check = false;
+            int choice;
+            while(check == false)
+            {
+                cout << "Do you want to approve this paper? " << endl;
+                cout << "1. Yes" << endl;
+                cout << "2. No (MEANS REJECTING)" << endl;
+                cout << "Choice: ";
+                cin >> choice;
+
+                switch (choice)
+                {
+                    case 1:
+                    {
+                        cout << "Paper approved!" << endl;
+                        check = true;
+                        researchPaper[i].setApproval();
+                    }
+                    break;
+                    case 2:
+                    {
+                        cout << "Paper rejected" << endl;
+                        researchPaper[i].setReject();
+                        check = true;
+                    }
+                    break;
+                    default:
+                    {
+                        cout << "Wrong input!" << endl;
+                        cout << "Please try again!" << endl;
+                        check = false;
+                    }
+                    break;
+                }
+            }
+        }
+        else
+        {
+            cout << "You are not allowed to approve a paper that you have contributed" << endl;
+        }
+        cout << "-------------------------------------------------------------------" << endl;
+    }
+    //dont forget to write into file;
+    writeAll(researchPaper, paperNum);
 }
 
 void PaperManagement::reviewDiscussion(string currentlyLoggedIn)

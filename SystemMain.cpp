@@ -348,7 +348,7 @@ void SystemMain::PCChairPage()
         cout << "10. Monitor PC " << endl;
         cout << "11. Check latest events  " << endl;
         cout << "12. Functionalities management" << endl;
-        cout << "13. Approve papers //nope" << endl;
+        cout << "13. Approve papers " << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -479,19 +479,29 @@ void SystemMain::PCChairPage()
             break;
             case 11:
             {
-                cout << "You have selected to check on the latest events //not implemented" << endl;
+                cout << "You have selected to check on the latest events " << endl;
                 pcChair.latestEvents();
             }
             break;
             case 12:
             {
-                cout << "You have selected to go to the functionalities management page //not implemented" << endl;
+                cout << "You have selected to go to the functionalities management page " << endl;
                 pcChair.functionalityManagement();
             }
             break;
             case 13:
             {
-                cout << "You have selected to approve/reject papers //not implemented" << endl;
+                //approve or reject paper after review discussion is turned off,
+                //submit review is off
+                if (functionalities.getReviewSubmission() == -1 && functionalities.getReviewDiscussion())
+                {
+                    cout << "You have selected to approve/reject papers " << endl;
+                    pcChair.approvePaper(currentLoggedInUser);
+                }
+                else
+                {
+                    cout << "You are not allowed to approve or reject papers until REVIEW discussion is switched off and paper review submissions is closed" << endl;
+                }
             }
             break;
             case 0:
@@ -677,13 +687,21 @@ void SystemMain::adminPage()
             break;
             case 13:
             {
-                cout << "You have selected to approve/reject papers //not implemented" << endl;
+                if (functionalities.getReviewSubmission() == -1 && functionalities.getReviewDiscussion())
+                {
+                    cout << "You have selected to approve/reject papers " << endl;
+                    admin.approvePaper(currentLoggedInUser);
+                }
+                else
+                {
+                    cout << "You are not allowed to approve or reject papers until REVIEW discussion is switched off and paper review submissions is closed" << endl;
+                }
             }
             break;
             case 14:
             {
                 cout << "Assign PC Chairs" << endl;
-
+                admin.assignPCChair();
             }
             break;
             case 15:

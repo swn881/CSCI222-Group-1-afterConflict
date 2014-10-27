@@ -3,6 +3,7 @@
 #include "UserBoundary.h"
 #include <cstring>
 #include <conio.h>
+#include <fstream>
 
 using namespace std;
 
@@ -120,6 +121,15 @@ void UserBoundary::registerUser()
     }
 
     userControl.registerUser(tempUN, tempFN, tempLN, tempEmail, tempUni, tempExp, tempPw);
+
+    //writing to events
+
+    ofstream outfile;
+    outfile.open("System/Events.txt", ios::app);
+
+    outfile << tempUN << " registered a new account." << endl;
+
+    outfile.close();
 }
 
 void UserBoundary::login(string& userID, string& userType)

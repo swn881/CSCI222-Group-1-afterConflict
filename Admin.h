@@ -9,6 +9,7 @@ class Admin : public PCChair
     private:
 
     public:
+        void assignPCChair();
 };
 
 #endif // _ADMIN_

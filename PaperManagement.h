@@ -32,6 +32,8 @@ class PaperManagement
         void submitAuthorResponse();
         void approvePaper(std::string);
 
+        void manuallyAssignPaper(std::string);
+
 
         void monitorPC();
 

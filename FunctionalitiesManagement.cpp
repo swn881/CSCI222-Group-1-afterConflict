@@ -18,7 +18,7 @@ void FuncManagement::menu()
 
     while (choice != 0)
     {
-        cout << "1. Auto-assign papers to reviewers     //not implemented" << endl;
+        cout << "1. Auto-assign papers to reviewers   " << endl;
         cout << "2. Auto-assign preferences to reviewer" << endl;
         cout << "3. Manually set the number of papers A reviewer receive    //not implemented" << endl;
         cout << "4. Generate conference proceeding" << endl;

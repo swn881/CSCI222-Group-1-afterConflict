@@ -19,6 +19,7 @@ class PCChair : public ProgramCommittee
         void obtainMoreDetails(User);
 
         void latestEvents();
+        void approvePaper(std::string);
 };
 
 #endif // _PCCHAIR_

@@ -20,6 +20,7 @@ class PCChair : public ProgramCommittee
 
         void latestEvents();
         void approvePaper(std::string);
+        void manuallyAssignPaper(std::string);
 };
 
 #endif // _PCCHAIR_

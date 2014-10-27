@@ -10,6 +10,7 @@ class Admin : public PCChair
 
     public:
         void assignPCChair();
+        void generateConference();
 };
 
 #endif // _ADMIN_

@@ -13,6 +13,7 @@
 #include "PaperAssignment.h"
 #include "Preference.h"
 #include "PaperDiscussion.h"
+#include "Functionalities.h"
 
 using namespace std;
 
@@ -23,6 +24,66 @@ string ExePath()
     GetModuleFileName( NULL, buffer, MAX_PATH );
     string::size_type pos = string( buffer ).find_last_of("\\/");
     return string(buffer).substr(0, pos);
+}
+
+void PaperManagement::notifications(string currentlyLoggedIn)
+{
+    int paperNum = countPaper();
+    ResearchPaper researchPaper[paperNum];
+    ifstream infile;
+    infile.open("System/Papers/Papers.txt");
+    for(int i = 0; i < paperNum; i++)
+    {
+        infile >> researchPaper[i];
+    }
+    infile.close();
+
+    int recordNum = countUser();
+    User user[recordNum];
+    infile.open("System/UserList.txt");
+    for(int i = 0; i < recordNum; i++)
+    {
+        infile >> user[i];
+    }
+    infile.close();
+
+    string userEmail;
+    for(int i = 0; i < recordNum; i++)
+    {
+        if (user[i].getUsername() == currentlyLoggedIn)
+        {
+            userEmail = user[i].getEmail();
+        }
+    }
+
+    for(int i = 0; i < paperNum; i++)
+    {
+        bool isFound = false;
+        vector<string> contributors = researchPaper[i].getContributedEmail();
+        for(int j = 0; j < contributors.size() && isFound == false; j++)
+        {
+            if(contributors[j] == userEmail)
+            {
+                //means we want to display the status of this paper
+                researchPaper[i].display();
+
+                switch(researchPaper[i].getApproval())
+                {
+                    case -1:
+                    {
+                        cout << "The paper has either been rejected or still awaiting approval!" << endl;
+                    }
+                    break;
+                    case 1:
+                    {
+                        cout << "The paper has been approved!" << endl;
+                    }
+                }
+
+                isFound = true;
+            }
+        }
+    }
 }
 
 void PaperManagement::manuallyAssignPaper(string currentlyLoggedIn)
@@ -46,11 +107,148 @@ void PaperManagement::manuallyAssignPaper(string currentlyLoggedIn)
     }
     infile.close();
 
+    Functionalities functionalities;
+    infile.open("System/Functionalities.txt");
+    infile >> functionalities;
+    infile.close();
+    //load the functionalities in
+
+    int recordNum = countUser();
+    User user[recordNum];
+    infile.open("System/UserList.txt");
+    for(int i = 0; i < recordNum; i++)
+    {
+        infile >> user[i];
+    }
+    infile.close();
+    //loaded each users
+
     //to manually assign a paper, we must check how many reviewers has been assigned to a apper
     //displays papers that are allowed to b assigned to a user
     //we should also check how many papers a reviewer has been assigned
     //displays users that are allowed to b assigned more papers
+    vector<int>paperPosition; //keeping track of papers which can still be assigned to users
+    vector<int>paperRemaining; //keep track on how many we can add
+    vector<int>userPosition; //keeping track of users who can accept more papers
+    vector<int>userRemaining; //how many more can we add
 
+
+    for(int i = 0; i < reviewNum; i++)
+    {
+        if (paperAssignment[i].getNumAssignedForReview() < functionalities.getReviewerPaperReceive())
+        {
+            //means the number of papers it can accept is not maxed yet
+            //save the position
+            paperPosition.push_back(i);
+            paperRemaining.push_back(functionalities.getReviewerPaperReceive() - paperAssignment[i].getNumAssignedForReview()); //keep track of the diff on how many we can add
+        }
+    }
+    //we got the list of papers
+
+    for(int i = 0; i < recordNum; i++)
+    {
+        if(user[i].getNumPaperAssigned() < functionalities.getPaperReviewerReceive() && user[i].getType() != "A") //make sure he is not author
+        {
+            //if lesser means we can assign more papers to him/her
+            userPosition.push_back(i);
+            userRemaining.push_back(functionalities.getPaperReviewerReceive() - user[i].getNumPaperAssigned());
+            //keep track of how many more we can add
+        }
+    }
+    //we got the list of users who still can receive more papers for review
+
+    for (int i = 0; i < paperPosition.size(); i++)
+    {
+        int choice = 9;
+        while(choice != 2 && paperRemaining[i] != 0)  //ill reduce paper remaining as i keep moving on
+        {
+            cout << "Papers that can be assigned more reviewers. . ." << endl;
+            researchPaper[paperPosition[i]].display();
+
+            cout << "You can add " << paperRemaining[i] << " more paper(s). " << endl;
+
+            cout << "Do you want to assign more reviewers to this paper?" << endl;
+            cout << "1. Yes" << endl;
+            cout << "2. No" << endl;
+            cout << "Choice: ";
+            cin >> choice;
+
+            switch(choice)
+            {
+                case 1:
+                {
+                    bool userCheck = false; //checking to check if there are actually anymore users to be assigned the paper
+                    //if all of vectors is 0 means theres no more user to assign papers
+                    for(int k = 0; k < userRemaining.size(); k++)
+                    {
+                        if(userRemaining[k] > 0)
+                            userCheck = true; //if its true, there are users that can still be assigned more papers
+
+                    }
+
+                    //display the list of users who can still be assigned more papers
+                    for(int k = 0; k < userPosition.size() && userCheck == true; k++)
+                    {
+                        if(userRemaining[k] != 0)
+                        {
+                            int decision = 9;
+                            cout << endl;
+                            cout << "Users who can be assigned more papers. . ." << endl;
+                            user[userPosition[k]].display();
+                            cout << "User can still be assigned " << userRemaining[k] << " more papers." << endl;
+
+                            cout << endl;
+                            cout << "Do you want to assign this user with this paper?" << endl;
+                            researchPaper[paperPosition[i]].display();
+
+                            cout << "1. Yes" << endl;
+                            cout << "2. No " << endl;
+                            cout << "Choice: ";
+                            cin >> decision;
+
+                            if (decision == 1)
+                            {
+                                paperRemaining[i]--; //paper cannot be assigned anymore users
+                                userRemaining[k]--;
+                                cout << "Assigned" << endl;
+                                paperAssignment[paperPosition[i]].setNumAssignedForReview(paperAssignment[paperPosition[i]].getNumAssignedForReview() + 1);
+                                paperAssignment[paperPosition[i]].addUser(user[userPosition[k]].getUsername());
+                                //dont just add assignment, user class also must add
+
+                                user[userPosition[k]].addNumPaperAssigned();
+                                user[userPosition[k]].addPaperAssigned(researchPaper[paperPosition[i]].getPaperID());
+                            }
+                            else
+                            {
+                                cout << "not assigning" << endl;
+                            }
+                        }
+                    }
+                }
+                break;
+                case 2:
+                {
+                    cout << "Okay moving on to next paper " << endl << endl;
+                }
+                break;
+                default:
+                {
+                    cout << "Wrong input." << endl;
+                    cout << "Lets try that again!" << endl << endl;
+                }
+            }
+        }
+        //dont forget to write into file
+    }
+    //writing into files
+    writeAssignment(paperAssignment, reviewNum);
+    ofstream outfile;
+    outfile.open("System/UserList.txt");
+    for(int i = 0; i < recordNum; i++)
+    {
+        outfile << user[i];
+    }
+    outfile.close();
 }
 
 
@@ -1043,6 +1241,7 @@ void PaperManagement::reviewPaper(string currentlyLoggedIn)
                         {
                             case 1:
                             {
+                                reverseTransfer(researchPaper[i]);
                                 cout << "Reviewing paper. . ." << endl;
                                 check = true;
                                 paperAssignment[i].addUserReview(makeReview(currentlyLoggedIn));
@@ -1467,6 +1666,57 @@ void PaperManagement::submitPaper()
 
     writeFile(researchPaper);
     cout << "You have successfully submitted a paper! " << endl << endl;
+}
+
+void PaperManagement::reverseTransfer(ResearchPaper researchPaper)
+{
+    string fileName;
+
+    DIR *dir = opendir(".");
+    if(dir)
+    {
+        struct direct *ent;
+    }
+
+    else
+    {
+        cout << "Error opening directory" << endl;
+    }
+    string fileDir = ExePath(); //path that im going to copy to this time
+    cout << fileDir << endl;
+
+
+    int ID = researchPaper.getPaperID();
+    //this will give me the user pdf file with my own generated ID
+    stringstream ss;
+    ss << ID;
+    string toTransferFrom = "System/Papers/" + ss.str() + ".pdf";
+    fileName = ss.str() + ".pdf";
+
+    fileDir = fileDir + "/" + fileName;
+
+    ifstream fin;
+    fin.open(toTransferFrom.c_str(), ios::binary);
+    if(!fin.good())
+    {
+        cout << "File does not exist" << endl;
+    }
+    else
+    {
+        ofstream fout;
+        fout.open(fileDir.c_str(), ios::binary);
+
+        while (!fin.eof())
+        {
+            char buf[1000];
+            fin.read(buf, sizeof(buf));
+            fout.write(buf, sizeof(buf));
+        }
+        fout.close();
+
+    }
+    fin.close();
+    cout << "Paper has been transferrred to " << fileDir << endl;
 }
 
 void PaperManagement::transferFile(ResearchPaper researchPaper)

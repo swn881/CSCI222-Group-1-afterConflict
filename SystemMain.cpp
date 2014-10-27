@@ -108,6 +108,8 @@ void SystemMain::authorPage()
         cout << "2. Modify personal details" << endl;
         cout << "3. Submit paper." << endl;
         cout << "4. Modify paper submission" << endl;
+        cout << "5. View status of paper" << endl;
+        cout << "6. Participate in conference" << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -161,6 +163,18 @@ void SystemMain::authorPage()
                 }
             }
             break;
+            case 5:
+            {
+                cout << "View status of paper" << endl;
+                author.notifications(currentLoggedInUser);
+            }
+            break;
+            case 6:
+            {
+                cout << "Participate in a conference" << endl;
+                author.participateConference(currentLoggedInUser);
+            }
+            break;
             case 0:
             {
                 cout << "Exiting . . ." << endl;
@@ -193,6 +207,8 @@ void SystemMain::PCpage()
         cout << "6. Review paper  " << endl;
         cout << "7. Modify review " << endl;
         cout << "8. Discuss review  " << endl;
+        cout << "9. View status of paper" << endl;
+        cout << "10. Participate in conference" << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -310,6 +326,18 @@ void SystemMain::PCpage()
                 }
             }
             break;
+            case 9:
+            {
+                cout << "View status of paper" << endl;
+                programCommittee.notifications(currentLoggedInUser);
+            }
+            break;
+            case 10:
+            {
+                cout << "Participate in a conference" << endl;
+                programCommittee.participateConference(currentLoggedInUser);
+            }
+            break;
             case 0:
             {
                 cout << "You have selected exit!" << endl;
@@ -349,6 +377,9 @@ void SystemMain::PCChairPage()
         cout << "11. Check latest events  " << endl;
         cout << "12. Functionalities management" << endl;
         cout << "13. Approve papers " << endl;
+        cout << "14. Manually assign paper to a reviewer" << endl;
+        cout << "15. View status of paper" << endl;
+        cout << "16. Participate in conference" << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -504,6 +535,32 @@ void SystemMain::PCChairPage()
                 }
             }
             break;
+            case 14:
+            {
+                //make sure submit paper off, and before review paper on (ie off)
+                if(functionalities.getPaperSubmission() == -1 && functionalities.getReviewSubmission() == -1)
+                {
+                    cout << "Manually asign a paper to a reviewer" << endl;
+                    pcChair.manuallyAssignPaper(currentLoggedInUser);
+                }
+                else
+                {
+                    cout << "Cant at the moment" << endl;
+                }
+            }
+            break;
+            case 15:
+            {
+                cout << "View status of paper" << endl;
+                pcChair.notifications(currentLoggedInUser);
+            }
+            break;
+            case 16:
+            {
+                cout << "Participate in a conference" << endl;
+                pcChair.participateConference(currentLoggedInUser);
+            }
+            break;
             case 0:
             {
                 cout << "You have selected exit!" << endl;
@@ -541,9 +598,12 @@ void SystemMain::adminPage()
         cout << "10. Monitor PC  " << endl;
         cout << "11. Check latest events  " << endl;
         cout << "12. Functionalities management" << endl;
-        cout << "13. Approve papers //nope" << endl;
-        cout << "14. Assign PC Chairs   //nope" << endl;
+        cout << "13. Approve papers " << endl;
+        cout << "14. Assign PC Chairs  " << endl;
         cout << "15. Generate Conference    //nope" << endl;
+        cout << "16. Manually assign paper to reviewerrs" << endl;
+        cout << "17. View status of paper" << endl;
+        cout << "18. Participate in conference" << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -707,6 +767,34 @@ void SystemMain::adminPage()
             case 15:
             {
                 cout << "Generate conference" << endl;
+                admin.generateConference();
+            }
+            break;
+
+            case 16:
+            {
+                //make sure submit paper off, and before review paper on (ie off)
+                if(functionalities.getPaperSubmission() == -1 && functionalities.getReviewSubmission() == -1)
+                {
+                    cout << "Manually asign a paper to a reviewer" << endl;
+                    admin.manuallyAssignPaper(currentLoggedInUser);
+                }
+                else
+                {
+                    cout << "Cant at the moment" << endl;
+                }
+            }
+            break;
+            case 17:
+            {
+                cout << "View status of paper" << endl;
+                admin.notifications(currentLoggedInUser);
+            }
+            break;
+            case 18:
+            {
+                cout << "Participate in a conference" << endl;
+                admin.participateConference(currentLoggedInUser);
             }
             break;
             case 0:

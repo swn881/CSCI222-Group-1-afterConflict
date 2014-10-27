@@ -518,16 +518,18 @@
 1414130224 c:\users\ng\desktop\lol\functionalities.h
 	<iostream>
 
-1414390545 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\admin.cpp
+1414416188 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\admin.cpp
+	<fstream>
 	<iostream>
 	"Admin.h"
 	"User.h"
+	"Conference.h"
 
-1414390249 c:\users\ng\documents\github\csci222-group-1-afterconflict\admin.h
+1414416171 c:\users\ng\documents\github\csci222-group-1-afterconflict\admin.h
 	"PCChair.h"
 	<iostream>
 
-1414390171 c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.h
+1414410577 c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.h
 	"ProgramCommittee.h"
 	"User.h"
 
@@ -535,7 +537,7 @@
 	"Author.h"
 	<iostream>
 
-1414200916 c:\users\ng\documents\github\csci222-group-1-afterconflict\author.h
+1414416922 c:\users\ng\documents\github\csci222-group-1-afterconflict\author.h
 	<iostream>
 	<vector>
 
@@ -544,13 +546,15 @@
 	<string>
 	<vector>
 
-1414200929 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\author.cpp
+1414416952 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\author.cpp
 	"Author.h"
 	"PaperManagement.h"
 	"UserBoundary.h"
+	"Conference.h"
 	<iostream>
+	<fstream>
 
-1414390648 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
+1414414173 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\main.cpp
 	<iostream>
 	"SystemMain.h"
 	"PaperManagement.h"
@@ -559,7 +563,7 @@
 	<iostream>
 	"Functionalities.h"
 
-1414392181 c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.h
+1414413848 c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.h
 	<iostream>
 	"ResearchPaper.h"
 	"PaperReview.h"
@@ -577,7 +581,7 @@
 	<cstring>
 	<iostream>
 
-1414390842 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
+1414413930 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
 	<iostream>
 	<windows.h>
 	<fstream>
@@ -593,6 +597,7 @@
 	"PaperAssignment.h"
 	"Preference.h"
 	"PaperDiscussion.h"
+	"Functionalities.h"
 
 1414308168 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.cpp
 	<iostream>
@@ -602,7 +607,7 @@
 1414308014 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.h
 	<iostream>
 
-1414390171 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
+1414410577 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
 	"PCChair.h"
 	"FunctionalitiesManagement.h"
 	"PaperManagement.h"
@@ -620,13 +625,14 @@
 	<iostream>
 	<vector>
 
-1414212572 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\preferencemanagement.cpp
+1414408144 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\preferencemanagement.cpp
 	<iostream>
 	<fstream>
 	<algorithm>
 	"PreferenceManagement.h"
 	"Preference.h"
 	"ResearchPaper.h"
+	"User.h"
 
 1414130820 c:\users\ng\documents\github\csci222-group-1-afterconflict\preferencemanagement.h
 	<iostream>
@@ -644,7 +650,7 @@
 	"ResearchPaper.h"
 	<stdlib.h>
 
-1414390545 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
+1414414265 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
 	<iostream>
 	<windows.h>
 	<fstream>
@@ -694,7 +700,7 @@
 1414144139 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalities.h
 	<iostream>
 
-1414384713 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
+1414410862 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
 	<iostream>
 	<stdlib.h>
 	<fstream>
@@ -732,4 +738,14 @@
 1414368967 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperdiscussion.h
 	<iostream>
 	<vector>
+
+1414416877 c:\users\ng\documents\github\csci222-group-1-afterconflict\conference.h
+	<iostream>
+	<vector>
+
+1414416252 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\conference.cpp
+	<iostream>
+	<stdlib.h>
+	<vector>
+	"Conference.h"
 

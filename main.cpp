@@ -10,7 +10,7 @@ int main()
     systemMain.mainPage();
 
     PaperManagement paperManagement;
-    //paperManagement.approvePaper("ngphgn");
+
 
     return 0;
 }

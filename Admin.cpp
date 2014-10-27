@@ -1,6 +1,8 @@
+#include <fstream>
 #include <iostream>
 #include "Admin.h"
 #include "User.h"
+#include "Conference.h"
 
 using namespace std;
 
@@ -49,4 +51,25 @@ void Admin::assignPCChair()
     cout << endl;
     cout << ">>> Going back to menu. . . <<<" << endl;
 
+}
+
+void Admin::generateConference()
+{
+    Conference newConf;
+    string tempString;
+    cin.ignore();
+    cout << "Generating new conference. . ." << endl;
+    cout << "Please input as stated." << endl;
+    cout << "Name of the conference: ";
+    getline(cin, tempString, '\n');
+    newConf.setConferenceName(tempString);
+
+    cout << "Location of the conference: ";
+    getline(cin, tempString, '\n');
+    newConf.setLocation(tempString);
+
+    ofstream outfile;
+    outfile.open("System/Conference.txt", ios::app);
+    outfile << newConf;
+    outfile.close();
 }

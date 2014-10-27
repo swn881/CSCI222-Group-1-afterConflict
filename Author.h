@@ -13,6 +13,11 @@ class Author
         void changePassword(std::string);
         void submitPaper();
         void modifyPaperSubmission(std::string);
+        void notifications(std::string);
+
+        void participateConference(std::string);
+
+        int countConference();
 };
 
 #endif

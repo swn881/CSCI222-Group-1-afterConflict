@@ -1,4 +1,4 @@
 Admin,Admin,pek,ng,nph@uowmail.edu.au,UOW,games.programming.sleep.asus,3,1002,1000,1002,e10adc3949ba59abbe56e057f20f883e
 PC,123456,wee,ng,swn881,inti subang,games.ai,3,1003,1003,1004,e10adc3949ba59abbe56e057f20f883e
 PCChair,ngphgn,Pek He,Ng,derp@derpmail.com,uow,fans.house.derp,1,1000,e10adc3949ba59abbe56e057f20f883e
-PCChair,kapilh,Kapil,Haresh,kapil@icloud.com,banana,savingprojects.apple,0,508df4cb2f4d8f80519256258cfb975f
+PCChair,kapilh,Kapil,Haresh,kapil@icloud.com,banana,savingprojects.apple,1,1001,508df4cb2f4d8f80519256258cfb975f

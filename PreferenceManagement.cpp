@@ -4,6 +4,7 @@
 #include "PreferenceManagement.h"
 #include "Preference.h"
 #include "ResearchPaper.h"
+#include "User.h"
 
 using namespace std;
 
@@ -26,60 +27,101 @@ void PrefManagement::specifyPreference(std::string currentlyLoggedInUser)
     }
     infile.close();
 
+    int recordNum = countUser();
+    User user[recordNum];
+    infile.open("System/UserList.txt");
+    for(int i = 0; i < recordNum; i++)
+    {
+        infile >> user[i];
+    }
+    infile.close();
+    //read in the user
+    //we want to make sure the user who is bidding is not the author himself
+
+    string userEmail;
+    for(int i = 0; i < recordNum; i++)
+    {
+        if(user[i].getUsername() == currentlyLoggedInUser)
+        {
+            userEmail = user[i].getEmail(); //use it to compare the email of the paper
+        }
+    }
+    bool isAuthor = false;
     //the vector position would represent the position of the paper in the file (what line is it in), we can check rhe ID directly
     //assuming preference can only be done after paper submissions have been closed
     //must do checking to make sure that paper submissions have been closed
     for(int i = 0; i < paperNum; i++)
     {
+        vector<string> contributorsEmail = researchPaper[i].getContributedEmail();
+        for(int k = 0; k < contributorsEmail.size(); k++)
+        {
+            if(contributorsEmail[k] == userEmail)
+            {
+                //means he has contributed to the paper
+                isAuthor = true; //if he is author, just set his preference to 2
+            }
+        }
+
         //checking is crucial
         while (check == false) //this checking is to make sure the user dont make wrong inputs, if he make wrong input in the middle, it'll mess up everything
         {
             researchPaper[i].display();
 
-            cout << "What is your preference on this paper? Would you review this paper?" << endl;
-            cout << "1. Yes " << endl;
-            cout << "2. No" << endl;
-            cout << "3. Maybe" << endl;
-            cout << "4. Conflict of Interest" << endl;
-            cout << "Choice: ";
-            cin >> choice;
-
-            switch (choice)
+            if(isAuthor)
             {
-                case 1:
+                cout << "You cannot bid on your paper! " << endl;
+                preference.addPreference(2);
+                check = true;
+            }
+            else
+            {
+                cout << "What is your preference on this paper? Would you review this paper?" << endl;
+                cout << "1. Yes " << endl;
+                cout << "2. No" << endl;
+                cout << "3. Maybe" << endl;
+                cout << "4. Conflict of Interest" << endl;
+                cout << "Choice: ";
+                cin >> choice;
+
+                switch (choice)
                 {
-                    //push in preference for that paper
-                    preference.addPreference(1);
-                    check = true;
+                    case 1:
+                    {
+                        //push in preference for that paper
+                        preference.addPreference(1);
+                        check = true;
+                    }
+                    break;
+                    case 2:
+                    {
+                        preference.addPreference(2);
+                        check = true;
+                    }
+                    break;
+                    case 3:
+                    {
+                        preference.addPreference(3);
+                        check = true;
+                    }
+                    break;
+                    case 4:
+                    {
+                        preference.addPreference(4);
+                        check = true;
+                    }
+                    break;
+                    default:
+                    {
+                        cout << "Invalid input!" << endl;
+                        cout << "Please try again!" << endl << endl;
+                        check = false;
+                    }
                 }
-                break;
-                case 2:
-                {
-                    preference.addPreference(2);
-                    check = true;
-                }
-                break;
-                case 3:
-                {
-                    preference.addPreference(3);
-                    check = true;
-                }
-                break;
-                case 4:
-                {
-                    preference.addPreference(4);
-                    check = true;
-                }
-                break;
-                default:
-                {
-                    cout << "Invalid input!" << endl;
-                    cout << "Please try again!" << endl << endl;
-                    check = false;
-                }
+
             }
         }
         check = false;
+        isAuthor = false;
     }
     //at this point the user would had specified preference for all papers
     //before i write into the file i should check if the user has already specified preference before

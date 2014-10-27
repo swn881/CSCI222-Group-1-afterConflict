@@ -20,6 +20,7 @@ class PaperManagement
         void writeAll(ResearchPaper[], int);
         void writeAssignment(PaperAssignment*, int);
         void transferFile(ResearchPaper); //get the file from the user and paste it in our directory
+        void reverseTransfer(ResearchPaper);
         int generateID(); //function to generate ID
         int countPaper(); //count number of lines in file
         int countUser();
@@ -33,7 +34,7 @@ class PaperManagement
         void approvePaper(std::string);
 
         void manuallyAssignPaper(std::string);
-
+        void notifications(std::string);
 
         void monitorPC();
 

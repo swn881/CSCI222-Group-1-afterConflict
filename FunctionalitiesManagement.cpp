@@ -20,15 +20,13 @@ void FuncManagement::menu()
     {
         cout << "1. Auto-assign papers to reviewers   " << endl;
         cout << "2. Auto-assign preferences to reviewer" << endl;
-        cout << "3. Manually set the number of papers A reviewer receive    //not implemented" << endl;
-        cout << "4. Generate conference proceeding" << endl;
-        cout << "5. Group paper         //not implemented" << endl;
-        cout << "6. Set the number of reviewers paper receive" << endl;
-        cout << "7. Set the number of papers reviewers receive" << endl;
-        cout << "8. Enable/Disable paper reviews" << endl;
-        cout << "9. Enable/Disable user response to the reviews" << endl;
-        cout << "10. Enable/Disable discussion among reviewers" <<  endl;
-        cout << "11. Enable/Disable paper submission" << endl;
+        cout << "3. Generate conference proceeding" << endl;
+        cout << "4. Set the number of reviewers paper receive" << endl;
+        cout << "5. Set the number of papers reviewers receive" << endl;
+        cout << "6. Enable/Disable paper reviews" << endl;
+        cout << "7. Enable/Disable user response to the reviews" << endl;
+        cout << "8. Enable/Disable discussion among reviewers" <<  endl;
+        cout << "9. Enable/Disable paper submission" << endl;
         cout << "0. Exit" << endl;
         cout << "Choice: ";
         cin >> choice;
@@ -61,11 +59,6 @@ void FuncManagement::menu()
             break;
         case 3:
             {
-                cout << "Manually set the number of papers A reviewer receive" << endl;
-            }
-            break;
-        case 4:
-            {
                 int decision;
                 cout << "Generate conference proceeding" << endl;
                 cout << "This is suggested to be done AFTER paper reviews has been closed!" << endl;
@@ -82,42 +75,37 @@ void FuncManagement::menu()
                 generateConferenceProceeding();
             }
             break;
-        case 5:
-            {
-                cout << "Group apper" << endl;
-            }
-            break;
-        case 6:
+        case 4:
             {
                 cout << "Set number of reviewers paper receive" << endl;
                 setReviewerPaperReceive();
             }
             break;
-        case 7:
+        case 5:
             {
                 cout << "Set number of papers reviewers receive" << endl;
                 setPaperReviewerReceive();
             }
             break;
-        case 8:
+        case 6:
             {
                 cout << "Enable/Disable paper reviews" << endl;
                 enableRevSubmission();
             }
             break;
-        case 9:
+        case 7:
             {
                 cout << "Enable/Disable user response to reviews" << endl;
                 enableAutResponse();
             }
             break;
-        case 10:
+        case 8:
             {
                 cout << "Enable/Disable discussion among reviewers" << endl;
                 enableRevDiscussion();
             }
             break;
-        case 11:
+        case 9:
             {
                 cout << "Enable/Disable paper submission" << endl;
                 enablePapSubmission();
@@ -803,7 +791,7 @@ void FuncManagement::autoSpecifyPreference()
 
     for (int i = 0; i < userNum; i++)
     {
-        if (prefManagement.checkUser(user[i].getUsername()) == false) //this is the function to check if user has already specified a preference or not, true meaning it has specified a preference
+        if (prefManagement.checkUser(user[i].getUsername()) == false && user[i].getType() != "A") //this is the function to check if user has already specified a preference or not, true meaning it has specified a preference
         {
             //false meaning he has not specified a preference yet
             //set the preference for all papaers OF THE USER to maybe
@@ -829,13 +817,15 @@ void FuncManagement::generateConferenceProceeding()
     infile.close();
 
     //at this point i have read all the papers in and i want to check their approvals and save their IDs
-
+    cout << "List of approved papers" << endl << endl;
     for(int i = 0; i < numOfPapers; i++)
     {
         if (researchPaper[i].getApproval() == 1) //1 means the paper is approved
         {
             //if approved i add the id into the vector so i can have a list of accepted papers
             approvedPapers.push_back(researchPaper[i].getPaperID());
+
+            researchPaper[i].display();
         }
     }
 

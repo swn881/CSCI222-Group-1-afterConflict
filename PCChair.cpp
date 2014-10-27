@@ -136,3 +136,9 @@ void PCChair::approvePaper(string currentlyLoggedIn)
     PaperManagement paperManagement;
     paperManagement.approvePaper(currentlyLoggedIn);
 }
+
+void PCChair::manuallyAssignPaper(string currentlyLoggedIn)
+{
+    PaperManagement paperManagement;
+    paperManagement.manuallyAssignPaper(currentlyLoggedIn);
+}

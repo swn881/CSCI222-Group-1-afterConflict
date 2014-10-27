@@ -35,6 +35,8 @@
 		<Unit filename="Admin.h" />
 		<Unit filename="Author.cpp" />
 		<Unit filename="Author.h" />
+		<Unit filename="Conference.cpp" />
+		<Unit filename="Conference.h" />
 		<Unit filename="Functionalities.cpp" />
 		<Unit filename="Functionalities.h" />
 		<Unit filename="FunctionalitiesManagement.cpp" />

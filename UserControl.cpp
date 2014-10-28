@@ -25,15 +25,12 @@ void UserControl::registerUser(string tempUN, string tempFN, string tempLN, stri
     {
         string encryptPassword;
         encryptPassword = md5(tempPw);
-        cout << encryptPassword << endl;
 
         User tempClass;
         tempClass.setAll(tempUN, tempFN, tempLN, tempEmail, tempUni, tempExp, encryptPassword); //remember to change tempPw
         tempClass.setType("A");
         outfile << tempClass;
         outfile.close();
-
-        cout << tempClass << endl;
     }
 }
 

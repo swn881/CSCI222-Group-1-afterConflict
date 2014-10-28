@@ -1,6 +1,8 @@
 #include <iostream>
 #include <windows.h>
 #include <fstream>
+#include <ctime>
+#include <conio.h>
 #include "SystemMain.h"
 #include "UserBoundary.h"
 #include "Author.h"
@@ -11,8 +13,33 @@
 
 using namespace std;
 
+void SetWindow(int Width, int Height)
+{
+    _COORD coord;
+    coord.X = Width;
+    coord.Y = Height;
+
+    _SMALL_RECT Rect;
+    Rect.Top = 0;
+    Rect.Left = 0;
+    Rect.Bottom = Height - 1;
+    Rect.Right = Width - 1;
+
+    HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);      // Get Handle
+    SetConsoleScreenBufferSize(Handle, coord);            // Set Buffer Size
+    SetConsoleWindowInfo(Handle, TRUE, &Rect);            // Set Window Size
+    SetConsoleTitle("CONFERENCE MANAGEMENT SYSTEM v1.0"); // Change title for Console Window.
+}
+
+
 void SystemMain::mainPage()
 {
+    /***********************************************************************/
+
+    system("color 17"); //This is for the background colour of command prompt
+
+	/***********************************************************************/
+
     int choice = 9;
     UserBoundary userBoundary;
 
@@ -44,7 +71,7 @@ void SystemMain::mainPage()
                 homePage();
             }
             break;
-            case 9:
+            case 0:
             {
                 cout << "Thanks for using the system!" << endl;
             }
@@ -524,7 +551,7 @@ void SystemMain::PCChairPage()
             {
                 //approve or reject paper after review discussion is turned off,
                 //submit review is off
-                if (functionalities.getReviewSubmission() == -1 && functionalities.getReviewDiscussion())
+                if (functionalities.getReviewSubmission() == -1 && functionalities.getReviewDiscussion() == -1)
                 {
                     cout << "You have selected to approve/reject papers " << endl;
                     pcChair.approvePaper(currentLoggedInUser);
@@ -600,7 +627,7 @@ void SystemMain::adminPage()
         cout << "12. Functionalities management" << endl;
         cout << "13. Approve papers " << endl;
         cout << "14. Assign PC Chairs  " << endl;
-        cout << "15. Generate Conference    //nope" << endl;
+        cout << "15. Generate Conference   " << endl;
         cout << "16. Manually assign paper to reviewerrs" << endl;
         cout << "17. View status of paper" << endl;
         cout << "18. Participate in conference" << endl;
@@ -747,7 +774,7 @@ void SystemMain::adminPage()
             break;
             case 13:
             {
-                if (functionalities.getReviewSubmission() == -1 && functionalities.getReviewDiscussion())
+                if (functionalities.getReviewSubmission() == -1 && functionalities.getReviewDiscussion() == -1)
                 {
                     cout << "You have selected to approve/reject papers " << endl;
                     admin.approvePaper(currentLoggedInUser);

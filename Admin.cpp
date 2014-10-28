@@ -9,7 +9,7 @@ using namespace std;
 void Admin::assignPCChair()
 {
     User * user;
-    int recordNum = count();
+    int recordNum = countUser();
     user = new User[recordNum];
     loadFile(user, recordNum);
 
@@ -17,8 +17,8 @@ void Admin::assignPCChair()
     bool check = false;
     cout << endl;
     cout << "Authors who can be assigned the role PC Chair: " << endl;
-
-    for(int i = 0; i < recordNum; i++)
+    bool alreadyAssigned = false;
+    for(int i = 0; i < recordNum && alreadyAssigned == false; i++)
     {
         if(user[i].getType() != "PCChair" && user[i].getType() != "Admin") //as long they are not admin or PCChair i can assign them as PC Chair
         {
@@ -36,7 +36,7 @@ void Admin::assignPCChair()
             {
                 user[i].setType("PCChair");
                 cout << endl << "User has been assigned the role of PC!" << endl;
-
+                alreadyAssigned = true;
                 writeFile(user, recordNum);
             }
         }

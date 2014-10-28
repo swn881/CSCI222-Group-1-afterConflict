@@ -9,7 +9,7 @@ using namespace std;
 void PCChair::assignPC()
 {
     User * user;
-    int recordNum = count();
+    int recordNum = countUser();
     user = new User[recordNum];
     loadFile(user, recordNum);
 
@@ -79,14 +79,7 @@ void PCChair::functionalityManagement()
     FuncManagement funcManagement;
     funcManagement.menu();
 }
-
-void PCChair::obtainMoreDetails(User user)
-{
-    cout << user.getUsername();
-}
-
-
-int PCChair::count()
+int PCChair::countUser()
 {
         //counting the number of lines
     int recordCount = 0;

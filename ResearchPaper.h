@@ -36,6 +36,7 @@ class ResearchPaper
 
         int getPaperID();
         int getApproval();
+        std::string getTitle() { return title; }
         std::string getKeywords() { return keywords; }
         std::vector<std::string> getContributedEmail() { return contributedEmail; }
         int getNumContributors() { return numContributors; }

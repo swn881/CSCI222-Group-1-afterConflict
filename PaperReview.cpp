@@ -354,7 +354,7 @@ void PaperReview::editReview()
         {
             case 1:
             {
-
+                cin.ignore();
                 cout << "What are the strengths of the paper? " << endl;
                 cout << "Strengths: ";
                 getline(cin, tempString, '\n');

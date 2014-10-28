@@ -132,6 +132,14 @@ void PaperManagement::manuallyAssignPaper(string currentlyLoggedIn)
     vector<int>userPosition; //keeping track of users who can accept more papers
     vector<int>userRemaining; //how many more can we add
 
+    string userEmail;
+    for(int i = 0; i < recordNum; i++ )
+    {
+        if(user[i].getUsername() == currentlyLoggedIn)
+        {
+            userEmail = user[i].getEmail();
+        }
+    }
 
     for(int i = 0; i < reviewNum; i++)
     {
@@ -139,15 +147,19 @@ void PaperManagement::manuallyAssignPaper(string currentlyLoggedIn)
         {
             //means the number of papers it can accept is not maxed yet
             //save the position
-            paperPosition.push_back(i);
-            paperRemaining.push_back(functionalities.getReviewerPaperReceive() - paperAssignment[i].getNumAssignedForReview()); //keep track of the diff on how many we can add
+            vector<string> contributedList = researchPaper[i].getContributedEmail(); //this is to check and make sure the user do not assign himself to his paper
+            if(find(contributedList.begin(), contributedList.end(), userEmail) == contributedList.end())
+            {
+                paperPosition.push_back(i);
+                paperRemaining.push_back(functionalities.getReviewerPaperReceive() - paperAssignment[i].getNumAssignedForReview()); //keep track of the diff on how many we can add
+            }
         }
     }
     //we got the list of papers
 
     for(int i = 0; i < recordNum; i++)
     {
-        if(user[i].getNumPaperAssigned() < functionalities.getPaperReviewerReceive() && user[i].getType() != "A") //make sure he is not author
+        if(user[i].getNumPaperAssigned() < functionalities.getPaperReviewerReceive() && user[i].getType() != "A" ) //make sure he is not author
         {
             //if lesser means we can assign more papers to him/her
             userPosition.push_back(i);
@@ -1682,8 +1694,8 @@ void PaperManagement::reverseTransfer(ResearchPaper researchPaper)
     {
         cout << "Error opening directory" << endl;
     }
+
     string fileDir = ExePath(); //path that im going to copy to this time
-    cout << fileDir << endl;
 
 
     int ID = researchPaper.getPaperID();
@@ -1691,9 +1703,9 @@ void PaperManagement::reverseTransfer(ResearchPaper researchPaper)
     stringstream ss;
     ss << ID;
     string toTransferFrom = "System/Papers/" + ss.str() + ".pdf";
-    fileName = ss.str() + ".pdf";
+    fileName = researchPaper.getTitle() + ".pdf";
 
-    fileDir = fileDir + "/" + fileName;
+    fileDir = fileDir + "\\" + fileName;
 
     ifstream fin;
     fin.open(toTransferFrom.c_str(), ios::binary);

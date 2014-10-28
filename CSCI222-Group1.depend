@@ -518,7 +518,7 @@
 1414130224 c:\users\ng\desktop\lol\functionalities.h
 	<iostream>
 
-1414416188 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\admin.cpp
+1414493475 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\admin.cpp
 	<fstream>
 	<iostream>
 	"Admin.h"
@@ -529,7 +529,7 @@
 	"PCChair.h"
 	<iostream>
 
-1414410577 c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.h
+1414493440 c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.h
 	"ProgramCommittee.h"
 	"User.h"
 
@@ -569,7 +569,7 @@
 	"PaperReview.h"
 	"PaperAssignment.h"
 
-1414389324 c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.h
+1414497846 c:\users\ng\documents\github\csci222-group-1-afterconflict\researchpaper.h
 	<iostream>
 	<vector>
 
@@ -581,7 +581,7 @@
 	<cstring>
 	<iostream>
 
-1414413930 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
+1414497838 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\papermanagement.cpp
 	<iostream>
 	<windows.h>
 	<fstream>
@@ -599,7 +599,7 @@
 	"PaperDiscussion.h"
 	"Functionalities.h"
 
-1414308168 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.cpp
+1414498831 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.cpp
 	<iostream>
 	<stdlib.h>
 	"PaperReview.h"
@@ -607,7 +607,7 @@
 1414308014 c:\users\ng\documents\github\csci222-group-1-afterconflict\paperreview.h
 	<iostream>
 
-1414410577 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
+1414493440 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\pcchair.cpp
 	"PCChair.h"
 	"FunctionalitiesManagement.h"
 	"PaperManagement.h"
@@ -650,10 +650,12 @@
 	"ResearchPaper.h"
 	<stdlib.h>
 
-1414414265 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
+1414499469 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\systemmain.cpp
 	<iostream>
 	<windows.h>
 	<fstream>
+	<ctime>
+	<conio.h>
 	"SystemMain.h"
 	"UserBoundary.h"
 	"Author.h"
@@ -684,7 +686,7 @@
 	<conio.h>
 	<fstream>
 
-1414209482 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\usercontrol.cpp
+1414479181 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\usercontrol.cpp
 	<iostream>
 	<fstream>
 	"UserControl.h"
@@ -700,7 +702,7 @@
 1414144139 c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalities.h
 	<iostream>
 
-1414410862 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
+1414499142 source:c:\users\ng\documents\github\csci222-group-1-afterconflict\functionalitiesmanagement.cpp
 	<iostream>
 	<stdlib.h>
 	<fstream>

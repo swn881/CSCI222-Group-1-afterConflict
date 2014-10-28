@@ -24,7 +24,7 @@ void FuncManagement::menu()
         cout << "4. Set the number of reviewers paper receive" << endl;
         cout << "5. Set the number of papers reviewers receive" << endl;
         cout << "6. Enable/Disable paper reviews" << endl;
-        cout << "7. Enable/Disable user response to the reviews" << endl;
+        cout << "7. NOT IMPLEMENTED" << endl;
         cout << "8. Enable/Disable discussion among reviewers" <<  endl;
         cout << "9. Enable/Disable paper submission" << endl;
         cout << "0. Exit" << endl;
@@ -95,7 +95,7 @@ void FuncManagement::menu()
             break;
         case 7:
             {
-                cout << "Enable/Disable user response to reviews" << endl;
+                cout << "NOT IMPLEMENTED" << endl;
                 enableAutResponse();
             }
             break;
@@ -366,7 +366,6 @@ void FuncManagement::autoAssignPapersToReviewers()
                 {
                     if(yes[q] == user[w].getUsername())
                     {
-                        cout << 111 << endl;
                         user[w].addNumPaperAssigned();
                         user[w].addPaperAssigned(researchPaper[i].getPaperID());
 

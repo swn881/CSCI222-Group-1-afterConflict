@@ -13,10 +13,9 @@ class PCChair : public ProgramCommittee
         void monitorPC();
         void functionalityManagement();
 
-        int count();
+        int countUser();
         void writeFile(User*, int);
         void loadFile(User*, int);
-        void obtainMoreDetails(User);
 
         void latestEvents();
         void approvePaper(std::string);

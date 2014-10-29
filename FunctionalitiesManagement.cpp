@@ -24,7 +24,7 @@ void FuncManagement::menu()
         cout << "4. Set the number of reviewers paper receive" << endl;
         cout << "5. Set the number of papers reviewers receive" << endl;
         cout << "6. Enable/Disable paper reviews" << endl;
-        cout << "7. NOT IMPLEMENTED" << endl;
+        cout << "7. Enable author response" << endl;
         cout << "8. Enable/Disable discussion among reviewers" <<  endl;
         cout << "9. Enable/Disable paper submission" << endl;
         cout << "0. Exit" << endl;
